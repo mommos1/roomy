@@ -10,18 +10,18 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Member {
+public class Room {
+
     @Id @GeneratedValue
     private Long id;
 
-    private String username;    // 로그인 ID
-    private String password;
-    private String name;
+    private String name;        // 공간명
+    private String location;    // 위치
+    private int capacity;       // 인원 or 좌석 수
 
     @Enumerated(EnumType.STRING)
-    private MemberType role;          // USER / ADMIN
+    private RoomType roomType;  // CLASSROOM / STUDY_ROOM
 
-    // 예약 내역 (1:N)
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "room")
     private List<Reservation> reservations = new ArrayList<>();
 }

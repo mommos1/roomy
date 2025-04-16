@@ -1,5 +1,5 @@
 package io.toy.roomy.domain;
 
-public enum Role {
+public enum MemberType {
     USER, ADMIN
 }
