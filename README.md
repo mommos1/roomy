@@ -1,7 +1,7 @@
 # 📌 Roomy - 공간 예약 플랫폼
 
 > 강의실과 독서실을 통합하여 예약할 수 있는 실사용 기반 공간 예약 플랫폼입니다.  
-> 네카라쿠배, 당근, 오늘의집 등 서비스 회사 취업을 목표로 **Spring Boot 백엔드 중심 구조**로 설계되었습니다.
+> 서비스 회사 취업을 목표로 **Spring Boot 백엔드 중심 구조**로 설계되었습니다.
 
 ---
 
@@ -9,8 +9,8 @@
 
 | 구분 | 기술 |
 |------|------|
-| Language | Java 17 |
-| Framework | Spring Boot 3.x, Spring Security, Spring Data JPA |
+| Language | Java 24 |
+| Framework | Spring Boot 3.4.4, Spring Security, Spring Data JPA |
 | Build Tool | Gradle |
 | View | Thymeleaf |
 | DB | MySQL (or H2 for local test) |
