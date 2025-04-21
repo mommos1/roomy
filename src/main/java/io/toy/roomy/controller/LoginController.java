@@ -19,7 +19,7 @@ public class LoginController {
         model.addAttribute("css", "login/login :: css");
         model.addAttribute("content", "login/login :: content");
 
-        return "/layout/layout";
+        return "layout/layout";
     }
 
 }

@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title th:replace="~{login/login :: title}">Roomy</title>
-    <link rel="stylesheet" href="/css/layout.css"> <!-- 공통 CSS -->
-    <th:block th:replace="~{login/login :: css}"></th:block> <!-- 페이지별 추가 CSS -->
+    <!--<link rel="stylesheet" href="/css/layout.css"> &lt;!&ndash; 공통 CSS &ndash;&gt;-->
+    <link rel="stylesheet" href="/css/home.css">
+
 </head>
 <body>
 <!-- 공통 헤더 -->
@@ -13,7 +14,7 @@
 
 <!-- 본문 내용 -->
 <main>
-    <div th:replace="~{login/login :: content}"></div>
+    <div th:replace="${content}"></div>
 </main>
 
 <!-- 공통 푸터 -->
