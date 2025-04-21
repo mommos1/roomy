@@ -1,0 +1,22 @@
+<!-- layout/layout.html -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="~{login/login :: title}">Roomy</title>
+    <link rel="stylesheet" href="/css/layout.css"> <!-- 공통 CSS -->
+    <th:block th:replace="~{login/login :: css}"></th:block> <!-- 페이지별 추가 CSS -->
+</head>
+<body>
+<!-- 공통 헤더 -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- 본문 내용 -->
+<main>
+    <div th:replace="~{login/login :: content}"></div>
+</main>
+
+<!-- 공통 푸터 -->
+<div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>
