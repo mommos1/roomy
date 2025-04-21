@@ -3,9 +3,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:replace="~{login/login :: title}">Roomy</title>
-    <!--<link rel="stylesheet" href="/css/layout.css"> &lt;!&ndash; 공통 CSS &ndash;&gt;-->
+    <title th:text="~{__${title}__}">Roomy</title>
+    <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/home.css">
+
+    <link rel="stylesheet" th:replace="~{__${css}__}"/>
 
 </head>
 <body>
@@ -14,7 +16,7 @@
 
 <!-- 본문 내용 -->
 <main>
-    <div th:replace="${content}"></div>
+    <div th:replace="~{__${content}__}"></div>
 </main>
 
 <!-- 공통 푸터 -->
