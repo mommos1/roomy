@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 
     @GetMapping("/signup")
-    public String getSignupPage() {
-        return "/login/signup";
+    public String getSignupPage(Model model) {
+        model.addAttribute("title", "login/signup :: title");
+        model.addAttribute("css", "login/signup :: css");
+        model.addAttribute("content", "login/signup :: content");
+
+        return "/layout/layout";
     }
 
     @GetMapping("/login")

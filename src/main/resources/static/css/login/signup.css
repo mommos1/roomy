@@ -1,11 +1,11 @@
 /* 전체 배경과 기본 폰트 설정 */
-body {
+.login-wrapper {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f7f9fc;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 83vh;
     margin: 0;
 }
 

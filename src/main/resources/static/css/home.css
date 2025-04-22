@@ -44,7 +44,7 @@ nav a:hover {
 }
 
 .main-section {
-    height: calc(100vh - 120px);
+    height: calc(96vh - 120px);
     display: flex;
     justify-content: center;
     align-items: center;
