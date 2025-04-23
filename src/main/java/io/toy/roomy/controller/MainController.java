@@ -17,7 +17,11 @@ public class MainController {
     }
 
     @GetMapping("/selectSpace")
-    public String getSelectSpacePage() {
-        return "selectSpace";
+    public String getSelectSpacePage(Model model) {
+        model.addAttribute("title", "selectSpace :: title");
+        model.addAttribute("css", "selectSpace :: css");
+        model.addAttribute("content", "selectSpace :: content");
+
+        return "/layout/layout";
     }
 }

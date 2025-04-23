@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>강의실 예약</title>
+    <link rel="stylesheet" href="/css/reserve/classroom/reservation.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <a href="#" class="logo">Roomy</a>
+        <nav>
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li><a href="#">예약</a></li>
+                <li><a href="#">문의</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="main-container">
+    <h1>강의실 예약</h1>
+
+    <div class="reservation-form">
+        <label for="date">예약 날짜:</label>
+        <input type="date" id="date" name="date">
+
+        <label for="room">강의실 선택:</label>
+        <select id="room" name="room">
+            <option value="101">101호</option>
+            <option value="102">102호</option>
+            <option value="201">201호</option>
+            <option value="202">202호</option>
+        </select>
+
+        <button type="submit">예약하기</button>
+    </div>
+
+    <div class="reserved-list">
+        <h2>예약 내역</h2>
+        <ul>
+            <li>2024-04-30 - 101호</li>
+            <li>2024-05-01 - 201호</li>
+        </ul>
+    </div>
+</main>
+
+<footer>
+    © 2025 Roomy. All rights reserved.
+</footer>
+
+</body>
+</html>

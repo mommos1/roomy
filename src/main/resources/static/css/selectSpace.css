@@ -1,16 +1,17 @@
-body {
+.space-body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f7f9fc;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 82vh;
 }
 
 .space-select-container {
     text-align: center;
     padding: 40px 20px;
+    margin-top: -90px; /* 음수 마진으로 위로 이동 */
 }
 
 .space-select-container h2 {
