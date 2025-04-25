@@ -2,11 +2,9 @@ package io.toy.roomy.service;
 
 import io.toy.roomy.domain.Member;
 import io.toy.roomy.domain.MemberType;
-import io.toy.roomy.dto.MemberSignupRequestDto;
+import io.toy.roomy.dto.MemberSignupRequest;
 import io.toy.roomy.repository.MemberRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -17,14 +15,27 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-
-    public Member saveMember(MemberSignupRequestDto dto) {
+    /**
+     * 회원가입
+     * @param dto
+     * @return
+     */
+    public Member saveMember(MemberSignupRequest dto) {
         Member member = new Member();
         member.setUsername(dto.getUsername());
         member.setPassword(dto.getPassword());
         member.setName(dto.getName());
-        member.setRole(MemberType.USER); // 기본값 USER
 
         return memberRepository.save(member);
+    }
+
+    /**
+     * 로그인
+     * @param dto
+     * @return
+     */
+    public Member loginMember(MemberSignupRequest dto) {
+
+        return null;
     }
 }

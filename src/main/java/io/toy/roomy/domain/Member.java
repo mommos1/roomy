@@ -19,7 +19,7 @@ public class Member {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private MemberType role;          // USER / ADMIN
+    private MemberType memberType;          // USER / ADMIN
 
     // 예약 내역 (1:N)
     @OneToMany(mappedBy = "member")
