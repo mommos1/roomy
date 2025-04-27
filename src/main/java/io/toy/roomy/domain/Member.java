@@ -14,7 +14,7 @@ public class Member {
     @Id @GeneratedValue
     private Long id;
 
-    private String username;    // 로그인 ID
+    private String username; // 로그인 ID
     private String password;
     private String name;
 

@@ -1,5 +1,6 @@
 package io.toy.roomy.controller;
 
+import io.toy.roomy.common.CommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,23 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
 
+    CommonUtil commonUtil = new CommonUtil();
+
     @GetMapping("/signup")
     public String getSignupPage(Model model) {
-        model.addAttribute("title", "login/signup :: title");
-        model.addAttribute("css", "login/signup :: css");
-        model.addAttribute("content", "login/signup :: content");
 
-        return "/layout/layout";
+        return commonUtil.commonModelLayout(model, "login/signup");
     }
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
 
-        model.addAttribute("title", "login/login :: title");
-        model.addAttribute("css", "login/login :: css");
-        model.addAttribute("content", "login/login :: content");
-
-        return "/layout/layout";
+        return commonUtil.commonModelLayout(model, "login/login");
     }
 
 }
