@@ -1,15 +1,11 @@
 package io.toy.roomy.controller;
 
-import io.toy.roomy.domain.Member;
-import io.toy.roomy.dto.LoginResponse;
-import io.toy.roomy.dto.MemberSignupRequest;
+import io.toy.roomy.dto.response.ApiResponse;
+import io.toy.roomy.dto.response.LoginResponse;
+import io.toy.roomy.dto.request.MemberSignupRequest;
 import io.toy.roomy.service.MemberServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/member")
@@ -27,9 +23,9 @@ public class MemberController {
      * @return 회원가입 결과
      */
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody MemberSignupRequest dto) {
-        memberService.saveMember(dto);
-        return ResponseEntity.ok("회원가입 완료");
+    public ResponseEntity<ApiResponse> signup(@RequestBody MemberSignupRequest dto) {
+        memberService.signup(dto);
+        return ResponseEntity.ok(ApiResponse.success("회원가입 성공"));
     }
 
     /**
@@ -39,8 +35,8 @@ public class MemberController {
      */
     @ResponseBody
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody MemberSignupRequest dto) {
+    public ResponseEntity<ApiResponse> login(@RequestBody MemberSignupRequest dto) {
         memberService.loginMember(dto); // 실패하면 예외 발생
-        return ResponseEntity.ok(new LoginResponse("Y", null, null));
+        return ResponseEntity.ok(ApiResponse.success("로그인 성공"));
     }
 }

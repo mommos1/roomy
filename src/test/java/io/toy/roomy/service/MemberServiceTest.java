@@ -1,6 +1,6 @@
 package io.toy.roomy.service;
 
-import io.toy.roomy.dto.MemberSignupRequest;
+import io.toy.roomy.dto.request.MemberSignupRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +24,7 @@ public class MemberServiceTest {
         dto.setName("testName");
 
         IllegalStateException e = assertThrows(IllegalStateException.class,
-                () -> memberService.saveMember(dto));//예외가 발생해야 한다.
+                () -> memberService.signup(dto));//예외가 발생해야 한다.
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
     }
 

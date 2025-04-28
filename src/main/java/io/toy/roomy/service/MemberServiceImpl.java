@@ -1,13 +1,13 @@
 package io.toy.roomy.service;
 
 import io.toy.roomy.common.exception.DuplicateMemberException;
+import io.toy.roomy.common.exception.LoginFailedException;
 import io.toy.roomy.domain.Member;
 import io.toy.roomy.domain.MemberType;
-import io.toy.roomy.dto.MemberSignupRequest;
+import io.toy.roomy.dto.request.MemberSignupRequest;
 import io.toy.roomy.repository.MemberRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -21,19 +21,29 @@ public class MemberServiceImpl implements MemberService{
     /**
      * 회원가입
      */
-    public void saveMember(MemberSignupRequest dto) {
+    @Transactional
+    public void signup(MemberSignupRequest dto) {
+        duplicateChk(dto);
+
+        Member member = Member.builder()
+                .username(dto.getUsername())
+                .password(dto.getPassword())
+                .name(dto.getName())
+                .memberType(MemberType.USER)
+                .build();
+
+        memberRepository.save(member);
+    }
+
+    /**
+     * 회원중복체크
+     * @param dto 회원가입 dto
+     */
+    private void duplicateChk(MemberSignupRequest dto) {
         memberRepository.findByUsername(dto.getUsername())
                 .ifPresent(m -> {
                     throw new DuplicateMemberException("이미 존재하는 회원입니다");
                 });
-
-        Member member = new Member();
-        member.setUsername(dto.getUsername());
-        member.setPassword(dto.getPassword());
-        member.setName(dto.getName());
-        member.setMemberType(MemberType.USER);
-
-        memberRepository.save(member);
     }
 
     /**
@@ -44,6 +54,6 @@ public class MemberServiceImpl implements MemberService{
     public void loginMember(MemberSignupRequest dto) {
         memberRepository.findByUsername(dto.getUsername())
                 .filter(member -> member.getPassword().equals(dto.getPassword()))
-                .orElseThrow(() -> new DuplicateMemberException("잘못된 비밀번호입니다."));
+                .orElseThrow(() -> new LoginFailedException("잘못된 비밀번호입니다."));
     }
 }

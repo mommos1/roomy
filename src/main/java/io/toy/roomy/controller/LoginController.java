@@ -12,13 +12,11 @@ public class LoginController {
 
     @GetMapping("/signup")
     public String getSignupPage(Model model) {
-
         return commonUtil.commonModelLayout(model, "login/signup");
     }
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-
         return commonUtil.commonModelLayout(model, "login/login");
     }
 

@@ -1,4 +1,4 @@
-package io.toy.roomy.dto;
+package io.toy.roomy.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

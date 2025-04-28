@@ -1,14 +1,15 @@
 package io.toy.roomy.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Builder
 @Entity
 public class Member {
     @Id @GeneratedValue

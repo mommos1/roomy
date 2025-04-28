@@ -12,13 +12,11 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model model) {
-
         return commonUtil.commonModelLayout(model, "home");
     }
 
     @GetMapping("/selectSpace")
     public String getSelectSpacePage(Model model) {
-
         return commonUtil.commonModelLayout(model, "selectSpace");
     }
 }
