@@ -1,6 +1,7 @@
 package io.toy.roomy.controller;
 
 import io.toy.roomy.domain.Member;
+import io.toy.roomy.dto.LoginResponse;
 import io.toy.roomy.dto.MemberSignupRequest;
 import io.toy.roomy.service.MemberServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +39,8 @@ public class MemberController {
      */
     @ResponseBody
     @PostMapping("/login")
-    public Map login(@RequestBody MemberSignupRequest dto) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result", "Y");
-        try {
-            memberService.loginMember(dto);
-        } catch (IllegalArgumentException e) {
-            resultMap.put("error", e.getMessage());
-            resultMap.put("result", "N");
-        }
-        return resultMap;
+    public ResponseEntity<LoginResponse> login(@RequestBody MemberSignupRequest dto) {
+        memberService.loginMember(dto); // 실패하면 예외 발생
+        return ResponseEntity.ok(new LoginResponse("Y", null, null));
     }
 }
