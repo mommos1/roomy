@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * 중복회원 예외
+     */
     @ExceptionHandler(DuplicateMemberException.class)
     public ResponseEntity<ErrorResponse> handleDuplicateMember(DuplicateMemberException e) {
         return ResponseEntity
@@ -23,6 +26,9 @@ public class GlobalExceptionHandler {
                         .build());
     }
 
+    /**
+     * 로그인 실패 예외
+     */
     @ExceptionHandler(LoginFailedException.class)
     public ResponseEntity<ErrorResponse> handleLoginFailed(LoginFailedException e) {
         return ResponseEntity

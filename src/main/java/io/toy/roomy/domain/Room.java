@@ -19,9 +19,6 @@ public class Room {
     private String location;    // 위치
     private int capacity;       // 인원 or 좌석 수
 
-    @Enumerated(EnumType.STRING)
-    private RoomType roomType;  // CLASSROOM / STUDY_ROOM
-
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservations = new ArrayList<>();
 }

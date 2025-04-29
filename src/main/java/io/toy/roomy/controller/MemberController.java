@@ -1,5 +1,6 @@
 package io.toy.roomy.controller;
 
+import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.response.ApiResponse;
 import io.toy.roomy.dto.response.LoginResponse;
 import io.toy.roomy.dto.request.MemberSignupRequest;
@@ -35,7 +36,7 @@ public class MemberController {
      */
     @ResponseBody
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody MemberSignupRequest dto) {
+    public ResponseEntity<ApiResponse> login(@RequestBody MemberLoginRequest dto) {
         memberService.loginMember(dto); // 실패하면 예외 발생
         return ResponseEntity.ok(ApiResponse.success("로그인 성공"));
     }
