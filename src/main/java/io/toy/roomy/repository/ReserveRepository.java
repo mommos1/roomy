@@ -1,4 +1,7 @@
 package io.toy.roomy.repository;
 
-public interface ReserveRepository {
+import io.toy.roomy.domain.Reservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ReserveRepository extends JpaRepository<Reservation, Long> {
 }
