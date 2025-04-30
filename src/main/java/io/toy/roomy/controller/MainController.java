@@ -15,8 +15,8 @@ public class MainController {
         return commonUtil.commonModelLayout(model, "home");
     }
 
-    @GetMapping("/selectSpace")
-    public String getSelectSpacePage(Model model) {
-        return commonUtil.commonModelLayout(model, "selectSpace");
+    @GetMapping("/accommodationList")
+    public String getAccommodationListPage(Model model) {
+        return commonUtil.commonModelLayout(model, "reservation/user/accommodationList");
     }
 }

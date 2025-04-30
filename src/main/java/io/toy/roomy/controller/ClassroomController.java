@@ -29,10 +29,4 @@ public class ClassroomController {
         return "/reserve/classroom/reservation";
         //return commonUtil.commonModelLayout(model, "login/signup");
     }
-
-    @PostMapping("reserve/api/test")
-    public ResponseEntity<ApiResponse> test(AccommodationRequest dto) {
-        reserveService.registerRoom(dto);
-        return ResponseEntity.ok(ApiResponse.success("회원가입 성공"));
-    }
 }

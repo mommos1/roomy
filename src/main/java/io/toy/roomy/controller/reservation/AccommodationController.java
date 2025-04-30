@@ -1,8 +1,11 @@
 package io.toy.roomy.controller.reservation;
 
+import io.toy.roomy.dto.request.AccommodationRequest;
+import io.toy.roomy.dto.response.ApiResponse;
 import io.toy.roomy.service.ReservationService;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,5 +19,9 @@ public class AccommodationController {
         this.reservationService = reservationService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/regAccommodation")
+    public ResponseEntity<ApiResponse> regAccommodation(@RequestBody AccommodationRequest dto) {
+        reservationService.regAccommodation(dto);
+        return ResponseEntity.ok(ApiResponse.success("로그인 성공"));
+    }
 }

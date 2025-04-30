@@ -16,9 +16,8 @@ public class Room {
     private int pricePerNight;
     private int capacity;
 
-    @ManyToOne
-    @JoinColumn(name = "accommodation_id")
-    private Accommodation accommodation;
+//    @OneToMany(mappedBy = "room")
+//    private List<Reservation> reservations = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "room")
 //    private List<RoomImage> images = new ArrayList<>();

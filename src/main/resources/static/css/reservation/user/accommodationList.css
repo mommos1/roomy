@@ -1,6 +1,8 @@
-body {
+.accommodation-wrapper {
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
     color: #333;
 }
 
@@ -22,6 +24,7 @@ header .container {
     color: white;
     font-size: 24px;
     margin: 0;
+    text-decoration: none;
 }
 
 nav ul {
@@ -42,37 +45,50 @@ nav a:hover {
     text-decoration: underline;
 }
 
-.main-section {
-    height: calc(96vh - 120px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.accommodation-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.accommodation-container h2 {
     text-align: center;
-    background: linear-gradient(to bottom right, #ffffff, #e9f0fb);
-}
-
-.main-content h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.main-content p {
-    font-size: 18px;
     margin-bottom: 30px;
 }
 
-.btn-reserve {
-    padding: 12px 24px;
-    font-size: 16px;
-    background-color: #4a90e2;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+.accommodation-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
-.btn-reserve:hover {
-    background-color: #357abd;
+.accommodation-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 280px;
+    text-align: center;
+}
+
+.accommodation-card h3 {
+    margin-top: 0;
+}
+
+.accommodation-card button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.accommodation-card button:hover {
+    background-color: #357ac8;
 }
 
 footer {
@@ -81,4 +97,11 @@ footer {
     text-align: center;
     font-size: 14px;
     color: #777;
+}
+
+.accommodation-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 8px;
 }

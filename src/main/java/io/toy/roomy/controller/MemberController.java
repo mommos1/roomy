@@ -2,10 +2,8 @@ package io.toy.roomy.controller;
 
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.response.ApiResponse;
-import io.toy.roomy.dto.response.LoginResponse;
 import io.toy.roomy.dto.request.MemberSignupRequest;
 import io.toy.roomy.service.MemberService;
-import io.toy.roomy.service.MemberServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

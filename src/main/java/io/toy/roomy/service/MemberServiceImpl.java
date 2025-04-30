@@ -6,6 +6,7 @@ import io.toy.roomy.domain.Member;
 import io.toy.roomy.domain.type.MemberType;
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.request.MemberSignupRequest;
+import io.toy.roomy.dto.response.MemberResponse;
 import io.toy.roomy.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,12 @@ public class MemberServiceImpl implements MemberService{
 
     /**
      * 회원가입
-     * @param dto 회원가입 요청 데이터 (username, password)
-     * @return 로그인 성공 시 Member 객체 반환
-     * @throws LoginFailedException 비밀번호가 일치하지 않는 경우
+     * @param dto 회원가입 요청 데이터 (username, password, name, memberType)
+     * @throws LoginFailedException 아이디가 중복되었을 경우
      */
     @Override
     @Transactional
-    public Member signup(MemberSignupRequest dto) {
+    public void signup(MemberSignupRequest dto) {
         //중복 체크
         duplicateChk(dto);
 
@@ -41,17 +41,17 @@ public class MemberServiceImpl implements MemberService{
                 .memberType(MemberType.USER)
                 .build();
 
-        return memberRepository.save(member);
+        memberRepository.save(member);
     }
 
     /**
      * 회원중복체크
-     * @param dto 회원가입 dto
+     * @param dto 중 username 사용
      */
     @Override
     public void duplicateChk(MemberSignupRequest dto) {
         memberRepository.findByUsername(dto.getUsername())
-                .ifPresent(m -> {
+                .ifPresent(_ -> {
                     throw new DuplicateMemberException("이미 존재하는 회원입니다");
                 });
     }
@@ -59,15 +59,11 @@ public class MemberServiceImpl implements MemberService{
     /**
      * 회원 로그인
      * @param dto 로그인 요청 데이터 (username, password)
-     * @return 로그인 성공 시 Member 객체 반환
-     * @throws LoginFailedException 비밀번호가 일치하지 않는 경우
+     * @return 로그인 성공 시 MemberResponse 객체 반환
+     * @throws LoginFailedException 사용자가 존재하지 않거나 비밀번호가 일치하지 않는 경우
      */
     @Override
-    public Member loginMember(MemberLoginRequest dto) {
-//        return memberRepository.findByUsername(dto.getUsername())
-//                .filter(member -> member.getPassword().equals(dto.getPassword()))
-//                .orElseThrow(() -> new LoginFailedException("잘못된 비밀번호입니다."));
-
+    public MemberResponse loginMember(MemberLoginRequest dto) {
         Member member = memberRepository.findByUsername(dto.getUsername())
                 .orElseThrow(() -> new LoginFailedException("존재하지 않는 사용자입니다."));
 
@@ -75,6 +71,10 @@ public class MemberServiceImpl implements MemberService{
             throw new LoginFailedException("잘못된 비밀번호입니다.");
         }
 
-        return member;
+        return MemberResponse.builder()
+                .username(member.getUsername())
+                .name(member.getName())
+                .memberType(member.getMemberType())
+                .build();
     }
 }

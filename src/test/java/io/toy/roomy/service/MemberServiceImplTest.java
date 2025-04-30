@@ -4,6 +4,7 @@ import io.toy.roomy.common.exception.DuplicateMemberException;
 import io.toy.roomy.domain.Member;
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.request.MemberSignupRequest;
+import io.toy.roomy.dto.response.MemberResponse;
 import io.toy.roomy.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
-public class MemberServiceTest {
+public class MemberServiceImplTest {
 
     @Autowired
     private MemberServiceImpl memberService;
@@ -32,9 +33,9 @@ public class MemberServiceTest {
                 .name("testName")
                 .build();
         //When
-        Member member = memberService.signup(dto);
+        memberService.signup(dto);
         //Then
-        assertThat(memberRepository.findByUsername(member.getUsername())).isPresent();
+        assertThat(memberRepository.findByUsername(dto.getUsername())).isPresent();
     }
 
     //회원가입 중복 예외 테스트
@@ -76,8 +77,8 @@ public class MemberServiceTest {
                 .password("1234")
                 .build();
         //When
-        Member member = memberService.loginMember(loginDto);
+        MemberResponse memberResponse = memberService.loginMember(loginDto);
         //Then
-        assertThat(member.getUsername()).isEqualTo("junitTest");
+        assertThat(memberResponse.getUsername()).isEqualTo("junitTest");
     }
 }

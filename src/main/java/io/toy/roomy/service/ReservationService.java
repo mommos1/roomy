@@ -5,5 +5,5 @@ import io.toy.roomy.dto.request.AccommodationRequest;
 
 public interface ReservationService {
 
-    Accommodation registerRoom(AccommodationRequest dto);
+    Accommodation regAccommodation(AccommodationRequest dto);
 }

@@ -27,7 +27,7 @@ public class Accommodation {
     private String location;
     private AccommodationType type; // HOTEL, MOTEL, PENSION
 
-    @OneToMany(mappedBy = "accommodation")
-    private List<Room> rooms = new ArrayList<>();
+//    @OneToMany(mappedBy = "room_id")
+//    private List<Room> rooms = new ArrayList<>();
 }
 
