@@ -11,47 +11,50 @@
     <div class="login-wrapper">
         <div class="signup-container">
             <h2>SIGNUP</h2>
-            <form action="/member/signup" method="post">
                 <label for="username">아이디</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" required>
 
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" required>
 
                 <label for="name">닉네임</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" required>
 
-                <label for="role">회원 유형</label>
-                <select id="role" name="role" required>
+                <label for="memberType">회원 유형</label>
+                <select id="memberType" required>
                     <option value="">선택하세요</option>
                     <option value="USER">일반 사용자</option>
                     <option value="ADMIN">관리자</option>
                 </select>
 
-                <button type="submit">가입하기</button>
-            </form>
+                <button type="button" onclick="signup();">가입하기</button>
             <p class="login-link">이미 계정이 있으신가요? <a href="/login">로그인</a></p>
         </div>
     </div>
 
     <script type="text/javascript">
 
-        function login(){
+        function signup(){
 
             const username = $('#username').val();
             const password = $('#password').val();
+            const name = $('#name').val();
+            const memberType = $('#memberType').val();
 
             $.ajax({
-                url: "/member/login",
+                url: "/member/signup",
                 type: "POST",
                 contentType: "application/json",
                 dataType: "JSON",
                 data: JSON.stringify({
-                    username: username,
-                    password: password
+                    username : username,
+                    password : password,
+                    name : name,
+                    memberType : memberType
                 }),
                 success: function(data) {
                     if (data.result === 'Y') {
+                        alert("회원가입 완료.");
                         window.location = "/";
                     } else {
                         alert(data.detail);
