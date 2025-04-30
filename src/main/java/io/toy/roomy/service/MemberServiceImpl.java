@@ -3,7 +3,7 @@ package io.toy.roomy.service;
 import io.toy.roomy.common.exception.DuplicateMemberException;
 import io.toy.roomy.common.exception.LoginFailedException;
 import io.toy.roomy.domain.Member;
-import io.toy.roomy.domain.MemberType;
+import io.toy.roomy.domain.type.MemberType;
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.request.MemberSignupRequest;
 import io.toy.roomy.repository.MemberRepository;
@@ -22,6 +22,7 @@ public class MemberServiceImpl implements MemberService{
     /**
      * 회원가입
      */
+    @Override
     @Transactional
     public Member signup(MemberSignupRequest dto) {
         //중복 체크
@@ -41,7 +42,8 @@ public class MemberServiceImpl implements MemberService{
      * 회원중복체크
      * @param dto 회원가입 dto
      */
-    private void duplicateChk(MemberSignupRequest dto) {
+    @Override
+    public void duplicateChk(MemberSignupRequest dto) {
         memberRepository.findByUsername(dto.getUsername())
                 .ifPresent(m -> {
                     throw new DuplicateMemberException("이미 존재하는 회원입니다");
@@ -52,6 +54,7 @@ public class MemberServiceImpl implements MemberService{
      * 로그인
      * @param dto 로그인 정보
      */
+    @Override
     public Member loginMember(MemberLoginRequest dto) {
         return memberRepository.findByUsername(dto.getUsername())
                 .filter(member -> member.getPassword().equals(dto.getPassword()))

@@ -1,5 +1,6 @@
 package io.toy.roomy.domain;
 
+import io.toy.roomy.domain.type.MemberType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,5 +25,5 @@ public class Member {
 
     // 예약 내역 (1:N)
     @OneToMany(mappedBy = "member")
-    private List<Reservation> reservations = new ArrayList<>();
+    private List<Room> reservations = new ArrayList<>();
 }

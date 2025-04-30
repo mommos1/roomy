@@ -7,9 +7,8 @@ import io.toy.roomy.dto.request.MemberSignupRequest;
 public interface MemberService {
     //회원가입
     Member signup(MemberSignupRequest dto);
-
+    //아이디 중복체크
+    void duplicateChk(MemberSignupRequest dto);
     //로그인
     Member loginMember(MemberLoginRequest dto);
-
-
 }

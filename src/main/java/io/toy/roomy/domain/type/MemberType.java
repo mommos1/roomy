@@ -1,4 +1,4 @@
-package io.toy.roomy.domain;
+package io.toy.roomy.domain.type;
 
 public enum MemberType {
     USER, ADMIN

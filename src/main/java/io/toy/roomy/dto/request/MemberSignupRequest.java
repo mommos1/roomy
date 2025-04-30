@@ -1,9 +1,8 @@
 package io.toy.roomy.dto.request;
 
-import io.toy.roomy.domain.MemberType;
+import io.toy.roomy.domain.type.MemberType;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Builder

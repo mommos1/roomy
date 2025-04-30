@@ -1,7 +1,9 @@
 package io.toy.roomy.common;
 
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+@Component
 public class CommonUtil {
 
     public String commonModelLayout(Model model, String page) {
