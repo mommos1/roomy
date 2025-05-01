@@ -1,13 +1,13 @@
 package io.toy.roomy.dto.request;
 
-import io.toy.roomy.domain.type.AccommodationType;
+import io.toy.roomy.domain.type.StayType;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class AccommodationRequest {
+public class StayRequest {
     private String name;
     private String location;
-    private AccommodationType type;
+    private StayType type;
 }

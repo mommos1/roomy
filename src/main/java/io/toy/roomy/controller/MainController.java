@@ -14,9 +14,4 @@ public class MainController {
     public String home(Model model) {
         return commonUtil.commonModelLayout(model, "home");
     }
-
-    @GetMapping("/accommodationList")
-    public String getAccommodationListPage(Model model) {
-        return commonUtil.commonModelLayout(model, "reservation/user/accommodationList");
-    }
 }

@@ -1,8 +1,8 @@
 package io.toy.roomy.service;
 
-import io.toy.roomy.domain.Accommodation;
-import io.toy.roomy.domain.type.AccommodationType;
-import io.toy.roomy.dto.request.AccommodationRequest;
+import io.toy.roomy.domain.Stay;
+import io.toy.roomy.domain.type.StayType;
+import io.toy.roomy.dto.request.StayRequest;
 import io.toy.roomy.repository.ReservationRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ReservationServiceImplTest {
 
     @Autowired
-    private ReservationService reservationService;
+    private AdminStayService reservationService;
     @Autowired
     private ReservationRepository reserveRepository;
 
@@ -25,13 +25,13 @@ class ReservationServiceImplTest {
     @DisplayName("숙소업체등록")
     void regAccommodation() {
         //Given
-        AccommodationRequest dto = AccommodationRequest.builder()
+        StayRequest dto = StayRequest.builder()
                 .name("테스트호텔")
-                .type(AccommodationType.HOTEL)
+                .type(StayType.HOTEL)
                 .location("서울특별시")
                 .build();
         //When
-        Accommodation accommodation = reservationService.regAccommodation(dto);
+        Stay accommodation = reservationService.regStay(dto);
         //Then
         assertThat(reserveRepository.findByName(accommodation.getName())).isPresent();
     }
