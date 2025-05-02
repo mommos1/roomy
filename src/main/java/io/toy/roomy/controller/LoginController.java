@@ -8,16 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
 
-    CommonUtil commonUtil = new CommonUtil();
-
     @GetMapping("/signup")
     public String getSignupPage(Model model) {
-        return commonUtil.commonModelLayout(model, "login/signup");
+        return CommonUtil.commonModelLayout(model, "login/signup");
     }
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-        return commonUtil.commonModelLayout(model, "login/login");
+        return CommonUtil.commonModelLayout(model, "login/login");
     }
 
 }

@@ -1,12 +1,12 @@
 package io.toy.roomy.service;
 
+import io.toy.roomy.common.auth.JwtProvider;
 import io.toy.roomy.common.exception.DuplicateMemberException;
 import io.toy.roomy.common.exception.LoginFailedException;
 import io.toy.roomy.domain.Member;
 import io.toy.roomy.domain.type.MemberType;
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.request.MemberSignupRequest;
-import io.toy.roomy.dto.response.MemberResponse;
 import io.toy.roomy.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,12 @@ public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
-    public MemberServiceImpl(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    public MemberServiceImpl(MemberRepository memberRepository, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtProvider = jwtProvider;
     }
 
     /**
@@ -58,12 +60,13 @@ public class MemberServiceImpl implements MemberService{
 
     /**
      * 회원 로그인
+     *
      * @param dto 로그인 요청 데이터 (username, password)
      * @return 로그인 성공 시 MemberResponse 객체 반환
      * @throws LoginFailedException 사용자가 존재하지 않거나 비밀번호가 일치하지 않는 경우
      */
     @Override
-    public MemberResponse loginMember(MemberLoginRequest dto) {
+    public String loginMember(MemberLoginRequest dto) {
         Member member = memberRepository.findByUsername(dto.getUsername())
                 .orElseThrow(() -> new LoginFailedException("존재하지 않는 사용자입니다."));
 
@@ -71,10 +74,6 @@ public class MemberServiceImpl implements MemberService{
             throw new LoginFailedException("잘못된 비밀번호입니다.");
         }
 
-        return MemberResponse.builder()
-                .username(member.getUsername())
-                .name(member.getName())
-                .memberType(member.getMemberType())
-                .build();
+        return jwtProvider.generateToken(member.getUsername(), member.getMemberType().name(), member.getName());
     }
 }

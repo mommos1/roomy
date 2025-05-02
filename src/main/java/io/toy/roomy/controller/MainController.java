@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    CommonUtil commonUtil = new CommonUtil();
-
     @GetMapping("/")
     public String home(Model model) {
-        return commonUtil.commonModelLayout(model, "home");
+        return CommonUtil.commonModelLayout(model, "home");
     }
 }

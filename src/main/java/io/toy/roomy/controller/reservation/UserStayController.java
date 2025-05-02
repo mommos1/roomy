@@ -1,12 +1,12 @@
 package io.toy.roomy.controller.reservation;
 
 import io.toy.roomy.common.CommonUtil;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/stay")
 public class UserStayController {
 
@@ -14,8 +14,8 @@ public class UserStayController {
      * 호텔, 모텔 의 리스트를 반환합니다
      * @return 호텔, 모텔 리스트
      */
-    @GetMapping("/stay/list")
-    public String getAccommodationListPage(Model model) {
-        return CommonUtil.commonModelLayout(model, "reservation/user/accommodationList");
+    @GetMapping("/list")
+    public String getUserStayListPage(Model model) {
+        return CommonUtil.commonModelLayout(model, "reservation/user/stayList");
     }
 }

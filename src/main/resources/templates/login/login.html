@@ -41,11 +41,8 @@
                     password: password
                 }),
                 success: function(data) {
-                    if (data.result === 'Y') {
-                        window.location = "/";
-                    } else {
-                        alert(data.detail);
-                    }
+                    localStorage.setItem("accessToken", data.token);
+                    window.location = "/";
                 },
                 error: function(xhr) {
                     if (xhr.responseJSON && xhr.responseJSON.detail) {

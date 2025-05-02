@@ -4,11 +4,72 @@
         <div class="container">
             <a href="/" style="text-decoration: none;"><h1 class="logo">ROOMY</h1></a>
             <nav>
-                <ul>
+                <ul id="loginMenu">
                     <li><a href="/signup">회원가입</a></li>
                     <li><a href="/login">로그인</a></li>
+                </ul>
+                <ul id="logoutMenu" style="display: none">
+                    <li id="admin"><a href="/admin">관리자페이지</a></li>
+                    <li id="welcome"> ~ 님 환영합니다 </li>
+                    <li><a href="" type="button" onclick="logout(); return false;">로그아웃</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
+
+    <script>
+        //jwt 검증
+        $(document).ready(function () {
+            const token = localStorage.getItem("accessToken");
+
+            if (token) {
+                try {
+                    const payload = parseJwt(token);
+                    const username = payload.name //name
+                    const role = payload.role //role
+
+                    $("#welcome").text(username + " 님 환영합니다");
+                    $("#loginMenu").hide();
+                    $("#logoutMenu").show();
+
+                    if (role === 'ADMIN') {
+                        $('#admin').show();
+                    } else {
+                        $('#admin').hide();
+                    }
+                } catch (e) {
+                    console.error("토큰 파싱 실패", e);
+                    localStorage.removeItem("accessToken");
+                }
+            } else {
+                $("#welcome").text("");
+                $("#loginMenu").show();
+                $("#logoutMenu").hide();
+            }
+        });
+
+        //로그아웃
+        function logout() {
+            localStorage.removeItem("accessToken");
+            location.reload();
+        }
+
+        //한글변환
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+
+            const jsonPayload = decodeURIComponent(
+                atob(base64)
+                    .split('')
+                    .map(function(c) {
+                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                    })
+                    .join('')
+            );
+
+            return JSON.parse(jsonPayload);
+        }
+    </script>
 </div>

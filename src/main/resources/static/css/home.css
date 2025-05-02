@@ -32,14 +32,14 @@ nav ul {
     padding: 0;
 }
 
-nav a {
+nav {
     color: white;
     text-decoration: none;
     font-weight: 500;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .main-section {

@@ -1,4 +1,4 @@
-package io.toy.roomy;
+package io.toy.roomy.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

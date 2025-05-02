@@ -3,6 +3,7 @@ package io.toy.roomy.controller;
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.response.ApiResponse;
 import io.toy.roomy.dto.request.MemberSignupRequest;
+import io.toy.roomy.dto.response.TokenResponse;
 import io.toy.roomy.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,8 @@ public class MemberController {
      */
     @ResponseBody
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody MemberLoginRequest dto) {
-        memberService.loginMember(dto); // 실패하면 예외 발생
-        return ResponseEntity.ok(ApiResponse.success("로그인 성공"));
+    public ResponseEntity<TokenResponse> login(@RequestBody MemberLoginRequest dto) {
+        String token = memberService.loginMember(dto); // 실패하면 예외 발생
+        return ResponseEntity.ok(new TokenResponse(token));
     }
 }
