@@ -40,4 +40,11 @@ public class MemberController {
         String token = memberService.loginMember(dto); // 실패하면 예외 발생
         return ResponseEntity.ok(new TokenResponse(token));
     }
+
+    @ResponseBody
+    @PostMapping("/validateToken")
+    public ResponseEntity<TokenResponse> validateToken(String token) {
+
+        return ResponseEntity.ok(new TokenResponse(token));
+    }
 }
