@@ -1,5 +1,6 @@
 package io.toy.roomy.controller;
 
+import io.jsonwebtoken.Claims;
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.response.ApiResponse;
 import io.toy.roomy.dto.request.MemberSignupRequest;
@@ -41,10 +42,14 @@ public class MemberController {
         return ResponseEntity.ok(new TokenResponse(token));
     }
 
+    /**
+     * jwt 토큰 검증
+     * @param token 검증할 jwt token
+     * @return 검증 완료 시 token 의 정보, 실패 시 예외
+     */
     @ResponseBody
     @PostMapping("/validateToken")
-    public ResponseEntity<TokenResponse> validateToken(String token) {
-
-        return ResponseEntity.ok(new TokenResponse(token));
+    public ResponseEntity<Claims> validateToken(@RequestBody TokenResponse token) {
+        return ResponseEntity.ok(memberService.validateToken(token.getToken()));
     }
 }

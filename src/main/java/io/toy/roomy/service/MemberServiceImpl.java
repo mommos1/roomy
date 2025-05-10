@@ -1,5 +1,6 @@
 package io.toy.roomy.service;
 
+import io.jsonwebtoken.Claims;
 import io.toy.roomy.common.auth.JwtProvider;
 import io.toy.roomy.common.exception.DuplicateMemberException;
 import io.toy.roomy.common.exception.LoginFailedException;
@@ -76,4 +77,10 @@ public class MemberServiceImpl implements MemberService{
 
         return jwtProvider.generateToken(member.getUsername(), member.getMemberType().name(), member.getName());
     }
+
+    @Override
+    public Claims validateToken(String token) {
+        return jwtProvider.validateToken(token);
+    }
+
 }
