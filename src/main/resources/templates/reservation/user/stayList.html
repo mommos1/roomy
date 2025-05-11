@@ -17,7 +17,7 @@
                     <h3>메이호텔</h3>
                     <p>최대 수용 인원: 30명</p>
                     <p>50,000원 ~</p>
-                    <button>예약하기</button>
+                    <button onclick="goInfoPage();">예약하기</button>
                 </div>
                 <div class="accommodation-card">
                     <h3>202호 세미나실</h3>
@@ -94,4 +94,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function goInfoPage() {
+            window.location = "/stay/info";
+        }
+    </script>
 </th:block>
