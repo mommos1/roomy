@@ -16,7 +16,7 @@ public class UserStayController {
      */
     @GetMapping("/list")
     public String getUserStayListPage(Model model) {
-        return CommonUtil.commonModelLayout(model, "reservation/user/stayList");
+        return CommonUtil.commonModelLayout(model, "reservation/stayList");
     }
 
     /**
@@ -25,6 +25,6 @@ public class UserStayController {
      */
     @GetMapping("/info")
     public String getUserStayInfoPage(Model model) {
-        return CommonUtil.commonModelLayout(model, "reservation/user/stayInfo");
+        return CommonUtil.commonModelLayout(model, "reservation/stayInfo");
     }
 }

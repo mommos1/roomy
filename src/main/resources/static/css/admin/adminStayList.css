@@ -1,0 +1,44 @@
+.accommodation-section {
+    margin-top: 20px;
+}
+
+.accommodation-section h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #2c3e50;
+}
+
+.accommodation-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accommodation-table th, .accommodation-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.accommodation-table th {
+    background-color: #ecf0f1;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.accommodation-table td button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.accommodation-table td button:hover {
+    background-color: #2980b9;
+}

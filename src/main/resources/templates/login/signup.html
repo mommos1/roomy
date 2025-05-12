@@ -35,11 +35,27 @@
     <script type="text/javascript">
 
         function signup(){
-
             const username = $('#username').val();
             const password = $('#password').val();
             const name = $('#name').val();
             const memberType = $('#memberType').val();
+
+            if (!username) {
+                alert("아이디를 입력해주세요.");
+                return;
+            }
+            if (!password) {
+                alert("비밀번호를 입력해주세요.");
+                return;
+            }
+            if (!name) {
+                alert("이름을 입력해주세요.");
+                return;
+            }
+            if (!memberType) {
+                alert("타입을 선택해주세요.");
+                return;
+            }
 
             $.ajax({
                 url: "/member/signup",

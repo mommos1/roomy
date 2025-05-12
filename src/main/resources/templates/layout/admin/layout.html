@@ -1,0 +1,24 @@
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title th:replace="~{__${title}__}"></title>
+        <link rel="stylesheet" href="/css/layout/admin/layout.css">
+
+        <link rel="stylesheet" th:replace="~{__${css}__}"/>
+    </head>
+    <body>
+        <div class="admin-container">
+
+            <!-- 공통 헤더 -->
+            <div th:replace="~{layout/admin/header :: header}"></div>
+
+            <main class="main-content">
+                <div th:replace="~{__${content}__}"></div>
+            </main>
+
+        </div>
+    </body>
+</html>
