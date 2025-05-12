@@ -23,23 +23,12 @@
       </tr>
       </thead>
       <tbody>
-<!--      <tr th:each="acc : ${accommodations}">-->
-<!--        <td th:text="${acc.id}">1</td>-->
-<!--        <td th:text="${acc.name}">테스트호텔</td>-->
-<!--        <td th:text="${acc.location}">서울특별시</td>-->
-<!--        <td th:text="${acc.type}">HOTEL</td>-->
-<!--        <td th:text="${#temporals.format(acc.createdAt, 'yyyy-MM-dd')}">2025-05-12</td>-->
-<!--        <td>-->
-<!--          <button>수정</button>-->
-<!--          <button>삭제</button>-->
-<!--        </td>-->
-<!--      </tr>-->
-        <tr>
-          <td>1</td>
-          <td>테스트호텔</td>
-          <td>서울특별시</td>
-          <td>HOTEL</td>
-          <td>2025-05-12</td>
+        <tr th:each="stay : ${adminStayList}">
+          <td th:text="${stay.id}">1</td>
+          <td th:text="${stay.name}">테스트호텔</td>
+          <td th:text="${stay.location}">서울특별시</td>
+          <td th:text="${stay.type}">HOTEL</td>
+          <td th:text="${#temporals.format(stay.regDt, 'yyyy-MM-dd')}">2025-05-12</td>
           <td>
             <button>수정</button>
             <button>삭제</button>

@@ -2,8 +2,11 @@ package io.toy.roomy.service;
 
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.StayRequest;
+import io.toy.roomy.dto.response.adminStayListResponse;
 import io.toy.roomy.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdminStayServiceImpl implements AdminStayService {
@@ -28,5 +31,12 @@ public class AdminStayServiceImpl implements AdminStayService {
                 .build();
 
         return reserveRepository.save(accommodation);
+    }
+
+    @Override
+    public List<adminStayListResponse> getAll() {
+        return reserveRepository.findAll().stream()
+                .map(adminStayListResponse::from)
+                .toList();
     }
 }

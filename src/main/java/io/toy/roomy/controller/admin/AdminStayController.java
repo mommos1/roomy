@@ -6,6 +6,8 @@ import io.toy.roomy.service.AdminStayService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/stay")
 public class AdminStayController {

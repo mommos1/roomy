@@ -24,11 +24,11 @@ public class Stay {
     @Enumerated(EnumType.STRING)
     private StayType type; // HOTEL, MOTEL, PENSION
 
-    private LocalDateTime createdAt;
+    private LocalDateTime regDt;
 
     @PrePersist
     public void prePersist() {
-        this.createdAt = LocalDateTime.now().withNano(0);;
+        this.regDt = LocalDateTime.now().withNano(0);;
     }
 
 //    @OneToMany(mappedBy = "room_id")
