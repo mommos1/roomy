@@ -32,7 +32,7 @@ public class AdminStayController {
 
             // savedFileName을 DB에 저장하거나, Stay 엔티티에 포함시키기
             // 예: stay.setImageUrl("/images/" + savedFileName);
-            dto.setFilePath(filePath);
+            dto.setFilePath("/images/stayRegImage/" + filePath);
 
             reservationService.regStay(dto);
             return ResponseEntity.ok(ApiResponse.success("숙소 등록 성공"));

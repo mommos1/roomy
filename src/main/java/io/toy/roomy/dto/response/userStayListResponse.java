@@ -8,20 +8,18 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class adminStayListResponse {
+public class userStayListResponse {
     private Long id;
     private String name;
-    private String location;
     private String type;
-    private LocalDateTime regDt;
+    private String filePath;
 
-    public static adminStayListResponse from(Stay stay) {
-        return adminStayListResponse.builder()
+    public static userStayListResponse from(Stay stay) {
+        return userStayListResponse.builder()
                 .id(stay.getId())
                 .name(stay.getName())
-                .location(stay.getLocation())
                 .type(stay.getType().name())
-                .regDt(stay.getRegDt())
+                .filePath(stay.getFilePath())
                 .build();
     }
 }

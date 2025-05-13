@@ -10,86 +10,21 @@
 <th:block th:fragment="content">
     <div class="accommodation-wrapper">
         <div class="accommodation-container">
+
             <h2>숙소 목록</h2>
             <div class="accommodation-list">
-                <div class="accommodation-card">
-                    <img src="/images/accommodation/image.jpg" alt="101호 강의실 사진">
-                    <h3>메이호텔</h3>
-                    <p>최대 수용 인원: 30명</p>
-                    <p>50,000원 ~</p>
-                    <button onclick="goInfoPage();">예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>202호 세미나실</h3>
-                    <p>최대 수용 인원: 20명</p>
-                    <p>화상 회의 시스템</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
-                </div>
-                <div class="accommodation-card">
-                    <h3>303호 강의실</h3>
-                    <p>최대 수용 인원: 50명</p>
-                    <p>빔프로젝터, 마이크</p>
-                    <button>예약하기</button>
+                <th:block th:if="${userStayList != null and !#lists.isEmpty(userStayList)}">
+                    <div th:each="userStayList : ${userStayList}" class="accommodation-card">
+                        <img th:src="@{${userStayList.filePath}}" alt="101호 강의실 사진">
+                        <h3 th:text="${userStayList.name}">숙소이름</h3>
+                        <p>최대 수용 인원: 30명</p>
+                        <p>50,000원 ~</p>
+                        <button onclick="goInfoPage();">예약하기</button>
+                    </div>
+                </th:block>
+
+                <div th:if="${userStayList == null or #lists.isEmpty(userStayList)}">
+                    <p>데이터가 없습니다.</p>
                 </div>
             </div>
         </div>
