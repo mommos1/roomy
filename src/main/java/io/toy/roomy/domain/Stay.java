@@ -23,6 +23,7 @@ public class Stay {
     private String location;
     @Enumerated(EnumType.STRING)
     private StayType type; // HOTEL, MOTEL, PENSION
+    private String filePath;
 
     private LocalDateTime regDt;
 

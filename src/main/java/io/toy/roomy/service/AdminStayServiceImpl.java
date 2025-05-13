@@ -28,6 +28,7 @@ public class AdminStayServiceImpl implements AdminStayService {
                 .name(dto.getName())
                 .location(dto.getLocation())
                 .type(dto.getType())
+                .filePath(dto.getFilePath())
                 .build();
 
         return reserveRepository.save(accommodation);

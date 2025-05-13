@@ -9,7 +9,7 @@
 <div class="accommodation-form-section">
     <h2>숙소 등록</h2>
 
-    <form th:action="@{/admin/accommodations}" method="post" enctype="multipart/form-data" class="accommodation-form">
+    <form method="post" enctype="multipart/form-data" class="accommodation-form">
         <div class="form-group">
             <label for="image">대표 이미지</label>
             <input type="file" id="image" name="image" accept="image/*" required>
@@ -44,14 +44,15 @@
 <script>
 
     function regStay() {
+        const image = $('#image')[0].files[0];
         const name = $('#name').val();
         const location = $('#location').val();
         const type = $('#type').val();
 
-        console.log(name);
-        console.log(location);
-        console.log(type);
-
+        if (!image) {
+            alert("이미지를 첨부해주세요.");
+            return;
+        }
         if (!name) {
             alert("이름을 입력해주세요.");
             return;
@@ -65,16 +66,22 @@
             return;
         }
 
+        const formData = new FormData();
+        const dto = {
+            name: name,
+            location: location,
+            type: type
+        };
+
+        formData.append("stayDto", new Blob([JSON.stringify(dto)], { type: "application/json" }));
+        formData.append("imageFile", image);
+
         $.ajax({
             url: "/admin/stay/regStay",
             type: "POST",
-            contentType: "application/json",
-            dataType: "JSON",
-            data: JSON.stringify({
-                name: name,
-                location: location,
-                type : type
-            }),
+            processData: false,
+            contentType: false,
+            data: formData,
             success: function(data) {
                 alert("등록이 완료되었습니다.")
                 window.location = "/admin/stay/list";
