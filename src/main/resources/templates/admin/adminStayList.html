@@ -23,14 +23,14 @@
       </tr>
       </thead>
       <tbody>
-        <tr th:each="stay : ${adminStayList}">
-          <td th:text="${stay.id}">1</td>
+        <tr th:each="stay, iterStat : ${adminStayList}">
+          <td th:text="${iterStat.index + 1}">1</td>
           <td th:text="${stay.name}">테스트호텔</td>
           <td th:text="${stay.location}">서울특별시</td>
           <td th:text="${stay.type}">HOTEL</td>
           <td th:text="${#temporals.format(stay.regDt, 'yyyy-MM-dd')}">2025-05-12</td>
           <td>
-            <button>객실 상세보기</button>
+            <button type=button th:onclick="'goRoomList(' + ${stay.id} + ')'">객실 상세보기</button>
             <button>수정</button>
             <button>삭제</button>
           </td>
@@ -38,4 +38,10 @@
       </tbody>
     </table>
   </section>
+
+  <script>
+    function goRoomList(id) {
+      window.location = "/admin/room/list?id=" + id;
+    }
+  </script>
 </th:block>

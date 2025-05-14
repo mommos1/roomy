@@ -1,0 +1,41 @@
+<th:block th:fragment="title">
+    <title>객실 관리</title>
+</th:block>
+
+<th:block th:fragment="css">
+    <link rel="stylesheet" href="/css/admin/adminStayList.css">
+</th:block>
+
+<th:block th:fragment="content">
+    <section class="accommodation-section">
+        <h2>객실 목록</h2>
+        <button class="register-btn" onclick="location.href='/admin/room/regPage'">+ 등록하기</button>
+
+        <table class="accommodation-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>숙소명</th>
+                <th>위치</th>
+                <th>유형</th>
+                <th>등록일</th>
+                <th>관리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>테스트호텔</td>
+                <td>서울특별시</td>
+                <td>HOTEL</td>
+                <td>2025-05-12</td>
+                <td>
+                    <button>객실 상세보기</button>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</th:block>

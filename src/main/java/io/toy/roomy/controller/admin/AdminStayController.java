@@ -15,10 +15,10 @@ import java.io.IOException;
 @RequestMapping("/admin/stay")
 public class AdminStayController {
 
-    public final AdminStayService reservationService;
+    public final AdminStayService adminStayService;
 
-    public AdminStayController(AdminStayService reservationService) {
-        this.reservationService = reservationService;
+    public AdminStayController(AdminStayService adminStayService) {
+        this.adminStayService = adminStayService;
     }
 
     @PostMapping("/regStay")
@@ -34,7 +34,7 @@ public class AdminStayController {
             // 예: stay.setImageUrl("/images/" + savedFileName);
             dto.setFilePath("/images/stayRegImage/" + filePath);
 
-            reservationService.regStay(dto);
+            adminStayService.regStay(dto);
             return ResponseEntity.ok(ApiResponse.success("숙소 등록 성공"));
 
         } catch (IOException e) {
