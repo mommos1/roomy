@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,7 +34,7 @@ public class Stay {
         this.regDt = LocalDateTime.now().withNano(0);;
     }
 
-//    @OneToMany(mappedBy = "room_id")
-//    private List<Room> rooms = new ArrayList<>();
+    @OneToMany(mappedBy = "stay", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms = new ArrayList<>();
 }
 

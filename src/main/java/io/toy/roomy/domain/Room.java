@@ -15,10 +15,9 @@ public class Room {
     private String name;
     private int pricePerNight;
     private int capacity;
+    private String description;
 
-//    @OneToMany(mappedBy = "room")
-//    private List<Reservation> reservations = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "room")
-//    private List<RoomImage> images = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stay_id")
+    private Stay stay;
 }
