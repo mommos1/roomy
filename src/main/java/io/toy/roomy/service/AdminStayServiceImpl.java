@@ -3,7 +3,7 @@ package io.toy.roomy.service;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.StayRequest;
 import io.toy.roomy.dto.response.adminStayListResponse;
-import io.toy.roomy.repository.ReservationRepository;
+import io.toy.roomy.repository.StayRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
 @Service
 public class AdminStayServiceImpl implements AdminStayService {
 
-    private final ReservationRepository reserveRepository;
+    private final StayRepository reserveRepository;
 
-    public AdminStayServiceImpl(ReservationRepository reserveRepository) {
+    public AdminStayServiceImpl(StayRepository reserveRepository) {
         this.reserveRepository = reserveRepository;
     }
 

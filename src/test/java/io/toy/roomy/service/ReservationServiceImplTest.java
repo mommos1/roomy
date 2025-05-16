@@ -3,7 +3,7 @@ package io.toy.roomy.service;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.domain.type.StayType;
 import io.toy.roomy.dto.request.StayRequest;
-import io.toy.roomy.repository.ReservationRepository;
+import io.toy.roomy.repository.StayRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ class ReservationServiceImplTest {
     @Autowired
     private AdminStayService reservationService;
     @Autowired
-    private ReservationRepository reserveRepository;
+    private StayRepository reserveRepository;
 
     @Test
     @DisplayName("숙소업체등록")
