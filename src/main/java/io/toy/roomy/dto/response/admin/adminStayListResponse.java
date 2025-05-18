@@ -1,4 +1,4 @@
-package io.toy.roomy.dto.response;
+package io.toy.roomy.dto.response.admin;
 
 import io.toy.roomy.domain.Stay;
 import lombok.Builder;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class adminStayListResponse {
+public class adminRoomListResponse {
     private Long id;
     private String name;
     private String location;

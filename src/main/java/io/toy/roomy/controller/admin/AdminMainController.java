@@ -1,7 +1,7 @@
 package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.common.CommonUtil;
-import io.toy.roomy.dto.response.adminStayListResponse;
+import io.toy.roomy.dto.response.admin.adminStayListResponse;
 import io.toy.roomy.service.AdminStayService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -2,7 +2,7 @@ package io.toy.roomy.service;
 
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.StayRequest;
-import io.toy.roomy.dto.response.adminStayListResponse;
+import io.toy.roomy.dto.response.admin.adminStayListResponse;
 
 import java.util.List;
 

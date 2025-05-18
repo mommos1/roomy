@@ -1,8 +1,7 @@
 package io.toy.roomy.controller.reservation;
 
 import io.toy.roomy.common.CommonUtil;
-import io.toy.roomy.dto.response.adminStayListResponse;
-import io.toy.roomy.dto.response.userStayListResponse;
+import io.toy.roomy.dto.response.user.userStayListResponse;
 import io.toy.roomy.service.UserStayService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

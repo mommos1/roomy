@@ -1,10 +1,8 @@
-package io.toy.roomy.dto.response;
+package io.toy.roomy.dto.response.user;
 
 import io.toy.roomy.domain.Stay;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Builder

@@ -1,6 +1,6 @@
 package io.toy.roomy.service;
 
-import io.toy.roomy.dto.response.userStayListResponse;
+import io.toy.roomy.dto.response.user.userStayListResponse;
 import io.toy.roomy.repository.StayRepository;
 import org.springframework.stereotype.Service;
 
