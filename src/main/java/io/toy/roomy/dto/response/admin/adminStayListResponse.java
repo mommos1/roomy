@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class adminRoomListResponse {
+public class adminStayListResponse {
     private Long id;
     private String name;
     private String location;

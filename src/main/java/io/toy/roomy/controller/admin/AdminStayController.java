@@ -4,6 +4,7 @@ import io.toy.roomy.common.FileUploadUtil;
 import io.toy.roomy.dto.request.StayRequest;
 import io.toy.roomy.dto.response.ApiResponse;
 import io.toy.roomy.service.AdminStayService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,22 @@ public class AdminStayController {
         this.adminStayService = adminStayService;
     }
 
+    @Value("${path.project}")
+    private String projectPath;
+
+    /**
+     * 숙소 등록
+     * @param dto
+     * @param image
+     * @return
+     */
     @PostMapping("/regStay")
     public ResponseEntity<?> adminRegStay(
             @RequestPart("stayDto") StayRequest dto,
             @RequestPart("imageFile") MultipartFile image) {
 
         try {
-            String uploadDir = "D:/jb/study/roomy/src/main/resources/static/images/stayRegImage"; // 원하는 저장 경로
+            String uploadDir = projectPath + "/resources/static/images/stayRegImage"; // 원하는 저장 경로
             String filePath = FileUploadUtil.saveFile(image, uploadDir);
 
             // savedFileName을 DB에 저장하거나, Stay 엔티티에 포함시키기

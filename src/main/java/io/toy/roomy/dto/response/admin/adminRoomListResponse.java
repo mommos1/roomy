@@ -1,5 +1,6 @@
 package io.toy.roomy.dto.response.admin;
 
+import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,14 +10,17 @@ import lombok.Getter;
 public class adminRoomListResponse {
     private Long id;
     private String name;
-    private
+    private int pricePerNight;
+    private int capacity;
+    private String description;
 
-    public static adminRoomListResponse from(Stay stay) {
+    public static adminRoomListResponse from(Room room) {
         return adminRoomListResponse.builder()
-                .id(stay.getId())
-                .name(stay.getName())
-                .type(stay.getType().name())
-                .regDt(stay.getRegDt())
+                .id(room.getId())
+                .name(room.getName())
+                .pricePerNight(room.getPricePerNight())
+                .capacity(room.getCapacity())
+                .description(room.getDescription())
                 .build();
     }
 }
