@@ -21,4 +21,10 @@ public class AdminRoomController {
         adminRoomService.regRoom(dto);
         return ResponseEntity.ok(ApiResponse.success("등록 성공"));
     }
+
+    @DeleteMapping("/delete/room/{roomId}")
+    public ResponseEntity<?> deleteRoom(@PathVariable Long roomId) {
+        adminRoomService.deleteRoom(roomId);
+        return ResponseEntity.ok(ApiResponse.success("삭제 성공"));
+    }
 }

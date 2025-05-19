@@ -23,8 +23,8 @@ public class AdminRoomServiceImpl implements AdminRoomService {
     }
 
     @Override
-    public List<adminRoomListResponse> getRoomList() {
-        return roomRepository.findAll().stream()
+    public List<adminRoomListResponse> getRoomList(Long stayId) {
+        return roomRepository.findByStayId(stayId).stream()
                 .map(adminRoomListResponse::from)
                 .toList();
     }
@@ -46,5 +46,12 @@ public class AdminRoomServiceImpl implements AdminRoomService {
                 .build();
 
         return roomRepository.save(room);
+    }
+
+    @Override
+    public void deleteRoom(Long roomId) {
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 객실이 존재하지 않습니다."));
+        roomRepository.delete(room);
     }
 }

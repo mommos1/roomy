@@ -12,7 +12,8 @@ import java.util.List;
 @Builder
 @Entity
 public class Room {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String name;

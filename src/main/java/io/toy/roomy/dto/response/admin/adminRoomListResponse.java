@@ -1,7 +1,6 @@
 package io.toy.roomy.dto.response.admin;
 
 import io.toy.roomy.domain.Room;
-import io.toy.roomy.domain.Stay;
 import lombok.Builder;
 import lombok.Getter;
 

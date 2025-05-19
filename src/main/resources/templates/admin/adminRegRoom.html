@@ -12,17 +12,17 @@
         <form method="post" enctype="multipart/form-data" class="accommodation-form">
             <div class="form-group">
                 <label for="name">객실 이름</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" placeholder="객실 이름 입력" required>
             </div>
 
             <div class="form-group">
                 <label for="name">금액</label>
-                <input type="text" id="pricePerNight" name="pricePerNight" placeholder="숙소 금액 입력" required>
+                <input type="number" id="pricePerNight" name="pricePerNight" placeholder="숙소 금액 입력" required>
             </div>
 
             <div class="form-group">
                 <label for="capacity">인원 수</label>
-                <input type="text" id="capacity" name="capacity" placeholder="예: 3" required>
+                <input type="number" id="capacity" name="capacity" placeholder="예: 3" required>
             </div>
 
             <div class="form-group">
@@ -43,6 +43,7 @@
             const pricePerNight = $('#pricePerNight').val();
             const capacity = $('#capacity').val();
             const description = $('#description').val();
+            const stayId = [[${stayId}]];
 
             if (!name) {
                 alert("이미지를 첨부해주세요.");
@@ -62,18 +63,19 @@
             }
 
             $.ajax({
-                url: "admin/room/list",
+                url: "/admin/room/regRoom",
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({
                     name: name,
                     pricePerNight: pricePerNight,
                     capacity: capacity,
-                    description: description
+                    description: description,
+                    stayId: stayId
                 }),
                 success: function(data) {
                     alert("등록이 완료되었습니다.")
-                    window.location = "admin/room/list";
+                    window.location = "/admin/room/list?stayId=" + stayId;
                 },
                 error: function(xhr) {
                     if (xhr.responseJSON && xhr.responseJSON.detail) {

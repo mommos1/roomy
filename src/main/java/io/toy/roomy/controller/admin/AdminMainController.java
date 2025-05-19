@@ -1,7 +1,9 @@
 package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.common.CommonUtil;
+import io.toy.roomy.dto.response.admin.adminRoomListResponse;
 import io.toy.roomy.dto.response.admin.adminStayListResponse;
+import io.toy.roomy.service.AdminRoomService;
 import io.toy.roomy.service.AdminStayService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +19,11 @@ import java.util.List;
 public class AdminMainController {
 
     private final AdminStayService adminStayService;
+    private final AdminRoomService adminRoomService;
 
-    public AdminMainController(AdminStayService adminStayService) {
+    public AdminMainController(AdminStayService adminStayService, AdminRoomService adminRoomService) {
         this.adminStayService = adminStayService;
+        this.adminRoomService = adminRoomService;
     }
 
     /**
@@ -57,22 +61,27 @@ public class AdminMainController {
     /**
      * 객실 관리 페이지
      * @param model title, css, content
+     * @param stayId 숙소 id값
      * @return adminLayout
      */
     @GetMapping("admin/room/list")
-    public String adminRoomList(Model model) {
-        List<adminStayListResponse> adminStayList = adminStayService.getAll();
-        model.addAttribute("adminStayList", adminStayList);
+    public String adminRoomList(@RequestParam("stayId") Long stayId, Model model) {
+        List<adminRoomListResponse> adminRoomList = adminRoomService.getRoomList(stayId);
+
+        model.addAttribute("stayId", stayId);
+        model.addAttribute("adminRoomList", adminRoomList);
         return CommonUtil.commonModelAdminLayout(model, "admin/adminRoomList");
     }
 
     /**
      * 객실 등록 페이지
      * @param model title, css, content
+     * @param stayId 숙소 id값
      * @return adminLayout
      */
     @GetMapping("admin/room/regPage")
-    public String adminRoomRegPage(@RequestParam("id") String id, Model model) {
+    public String adminRoomRegPage(@RequestParam("stayId") Long stayId, Model model) {
+        model.addAttribute("stayId", stayId);
         return CommonUtil.commonModelAdminLayout(model, "admin/adminRegRoom");
     }
 }
