@@ -1,6 +1,7 @@
 package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.common.CommonUtil;
+import io.toy.roomy.dto.response.admin.RoomDetailResponse;
 import io.toy.roomy.dto.response.admin.adminRoomListResponse;
 import io.toy.roomy.dto.response.admin.adminStayListResponse;
 import io.toy.roomy.service.AdminRoomService;
@@ -8,6 +9,7 @@ import io.toy.roomy.service.AdminStayService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
  * 관리자페이지 이동
  */
 @Controller
+@RequestMapping("/admin")
 public class AdminMainController {
 
     private final AdminStayService adminStayService;
@@ -31,7 +34,7 @@ public class AdminMainController {
      * @param model title, css, content
      * @return adminLayout
      */
-    @GetMapping("/admin/main")
+    @GetMapping("/main")
     public String adminHome(Model model) {
         return CommonUtil.commonModelAdminLayout(model, "admin/adminHome");
     }
@@ -41,7 +44,7 @@ public class AdminMainController {
      * @param model title, css, content
      * @return adminLayout
      */
-    @GetMapping("admin/stay/list")
+    @GetMapping("/stay/list")
     public String adminStayList(Model model) {
         List<adminStayListResponse> adminStayList = adminStayService.getAll();
         model.addAttribute("adminStayList", adminStayList);
@@ -53,7 +56,7 @@ public class AdminMainController {
      * @param model title, css, content
      * @return adminLayout
      */
-    @GetMapping("admin/stay/regPage")
+    @GetMapping("/stay/regPage")
     public String adminStayRegPage(Model model) {
         return CommonUtil.commonModelAdminLayout(model, "admin/adminRegStay");
     }
@@ -64,7 +67,7 @@ public class AdminMainController {
      * @param stayId 숙소 id값
      * @return adminLayout
      */
-    @GetMapping("admin/room/list")
+    @GetMapping("/room/list")
     public String adminRoomList(@RequestParam("stayId") Long stayId, Model model) {
         List<adminRoomListResponse> adminRoomList = adminRoomService.getRoomList(stayId);
 
@@ -79,9 +82,26 @@ public class AdminMainController {
      * @param stayId 숙소 id값
      * @return adminLayout
      */
-    @GetMapping("admin/room/regPage")
+    @GetMapping("/room/regPage")
     public String adminRoomRegPage(@RequestParam("stayId") Long stayId, Model model) {
         model.addAttribute("stayId", stayId);
         return CommonUtil.commonModelAdminLayout(model, "admin/adminRegRoom");
+    }
+
+    /**
+     * 객실 수정 페이지
+     * @param model title, css, content
+     * @param roomId 숙소 id값
+     * @return adminLayout
+     */
+    @GetMapping("/room/updatePage")
+    public String adminRoomUpdatePage(
+            @RequestParam("roomId") Long roomId,
+            Model model) {
+        RoomDetailResponse roomDetail = adminRoomService.getRoomDetail(roomId);
+        model.addAttribute("room", roomDetail);
+        model.addAttribute("roomId", roomId);
+
+        return CommonUtil.commonModelAdminLayout(model, "admin/adminUpdateRoom");
     }
 }

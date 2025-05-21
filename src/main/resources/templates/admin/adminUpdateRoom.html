@@ -1,0 +1,85 @@
+<th:block th:fragment="title">
+    <title>숙소 등록</title>
+</th:block>
+
+<th:block th:fragment="css">
+</th:block>
+
+<th:block th:fragment="content">
+    <div class="accommodation-form-section">
+        <h2>숙소 등록</h2>
+
+        <form method="post" enctype="multipart/form-data" class="accommodation-form">
+            <div class="form-group">
+                <label for="name">객실 이름</label>
+                <input type="text" id="name" name="name" th:value="${room.name}" placeholder="객실 이름 입력" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">금액</label>
+                <input type="number" id="pricePerNight" name="pricePerNight" th:value="${room.pricePerNight}" placeholder="숙소 금액 입력" required>
+            </div>
+
+            <div class="form-group">
+                <label for="capacity">인원 수</label>
+                <input type="number" id="capacity" name="capacity" th:value="${room.capacity}" placeholder="예: 3" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">설명</label>
+                <input type="text" id="description" name="description" th:value="${room.description}" placeholder="설명 입력" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" onclick="updateRoom();">수정하기</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        //객실 수정
+        function updateRoom() {
+            const roomId = [[${roomId}]];
+            const name = $('#name').val();
+            const pricePerNight = $('#pricePerNight').val();
+            const capacity = $('#capacity').val();
+            const description = $('#description').val();
+
+            if (!name) {
+                alert("이름을 입력해주세요.");
+                return;
+            }
+            if (!pricePerNight) {
+                alert("가격을 입력해주세요.");
+                return;
+            }
+            if (!capacity) {
+                alert("인원수를 입력해주세요.");
+                return;
+            }
+            if (!description) {
+                alert("설명을 입력해주세요.");
+                return;
+            }
+
+            $.ajax({
+                url: "/admin/room/update/" + roomId,
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    name: name,
+                    pricePerNight: pricePerNight,
+                    capacity: capacity,
+                    description: description
+                }),
+                success: function(data) {
+                    alert("수정이 완료되었습니다.");
+                    location.reload();
+                },
+                error: function(xhr) {
+                    alert("수정 중 오류 발생: " + xhr.responseText);
+                }
+            });
+        }
+    </script>
+</th:block>

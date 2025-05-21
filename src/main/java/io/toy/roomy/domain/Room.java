@@ -1,5 +1,6 @@
 package io.toy.roomy.domain;
 
+import io.toy.roomy.dto.request.RoomUpdateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,15 @@ import java.util.List;
 @Entity
 public class Room {
     @Id
-    @GeneratedValue
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,       // 시퀀스를 사용하겠다
+            generator = "room_seq_generator"          // 어떤 시퀀스를? → 아래 정의된 이름
+    )
+    @SequenceGenerator(
+            name = "room_seq_generator",              // JPA 내부에서 사용할 이름
+            sequenceName = "room_seq",                // 실제 DB의 시퀀스 이름
+            allocationSize = 1
+    )
     private Long id;
 
     private String name;
@@ -24,4 +33,12 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stay_id")
     private Stay stay;
+
+
+    public void update(RoomUpdateRequest dto) {
+        this.name = dto.getName();
+        this.capacity = dto.getCapacity();
+        this.pricePerNight = dto.getPricePerNight();
+        this.description = dto.getDescription();
+    }
 }
