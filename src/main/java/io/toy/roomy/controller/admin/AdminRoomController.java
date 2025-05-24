@@ -22,7 +22,7 @@ public class AdminRoomController {
      * @param dto 객실등록 정보
      * @return 응답 메시지
      */
-    @PostMapping("/regRoom")
+    @PostMapping
     public ResponseEntity<?> adminRegStay(@RequestBody RoomRequest dto) {
         adminRoomService.regRoom(dto);
         return ResponseEntity.ok(ApiResponse.success("객실 등록 성공"));
@@ -33,7 +33,7 @@ public class AdminRoomController {
      * @param roomId 삭제 객실 ID
      * @return 응답 메시지
      */
-    @DeleteMapping("/delete/{roomId}")
+    @DeleteMapping("/{roomId}")
     public ResponseEntity<?> deleteRoom(@PathVariable Long roomId) {
         adminRoomService.deleteRoom(roomId);
         return ResponseEntity.ok(ApiResponse.success("객실 삭제 성공"));
@@ -44,7 +44,7 @@ public class AdminRoomController {
      * @param roomId 수정 객실 ID
      * @return 응답 메시지
      */
-    @PutMapping("/update/{roomId}")
+    @PutMapping("/{roomId}")
     public ResponseEntity<?> updateRoom(
             @PathVariable Long roomId,
             @RequestBody RoomUpdateRequest dto) {

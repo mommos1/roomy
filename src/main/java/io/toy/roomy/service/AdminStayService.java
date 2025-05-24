@@ -11,4 +11,6 @@ public interface AdminStayService {
     Stay regStay(StayRequest dto);
 
     List<adminStayListResponse> getAll();
+    //숙소삭제
+    void deleteStay(Long stayId);
 }

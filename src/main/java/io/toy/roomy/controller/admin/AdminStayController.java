@@ -51,4 +51,15 @@ public class AdminStayController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 저장 실패: " + e.getMessage());
         }
     }
+
+    /**
+     * 숙소 삭제
+     * @param stayId 삭제 숙소 ID
+     * @return 응답 메시지
+     */
+    @DeleteMapping("/{stayId}")
+    public ResponseEntity<?> deleteStay(@PathVariable Long stayId) {
+        adminStayService.deleteStay(stayId);
+        return ResponseEntity.ok(ApiResponse.success("숙소 삭제 성공"));
+    }
 }

@@ -32,7 +32,7 @@
           <td>
             <button type=button th:onclick="'goRoomList(' + ${stay.id} + ')'">객실 상세보기</button>
             <button>수정</button>
-            <button>삭제</button>
+            <button type=button th:onclick="'deleteStay(' + ${stay.id} + ')'">삭제</button>
           </td>
         </tr>
       </tbody>
@@ -42,6 +42,26 @@
   <script>
     function goRoomList(id) {
       window.location = "/admin/room/list?stayId=" + id;
+    }
+
+    //숙소 삭제
+    function deleteStay(stayId) {
+      const result = confirm("정말 삭제하시겠습니까?");
+      if (!result) {
+        return;
+      }
+
+      $.ajax({
+        url: "/admin/stay/" + stayId,
+        type: "DELETE",
+        success: function(data) {
+          alert("삭제가 완료되었습니다.");
+          location.reload();
+        },
+        error: function(xhr) {
+          alert("삭제 중 오류 발생: " + xhr.responseText);
+        }
+      });
     }
   </script>
 </th:block>
