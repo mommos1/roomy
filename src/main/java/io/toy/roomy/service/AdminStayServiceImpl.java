@@ -3,6 +3,8 @@ package io.toy.roomy.service;
 import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.StayRequest;
+import io.toy.roomy.dto.response.admin.RoomDetailResponse;
+import io.toy.roomy.dto.response.admin.StayDetailResponse;
 import io.toy.roomy.dto.response.admin.adminStayListResponse;
 import io.toy.roomy.repository.StayRepository;
 import jakarta.transaction.Transactional;
@@ -32,6 +34,7 @@ public class AdminStayServiceImpl implements AdminStayService {
                 .location(dto.getLocation())
                 .type(dto.getType())
                 .filePath(dto.getFilePath())
+                .orgFileName(dto.getOrgFileName())
                 .build();
 
         return reserveRepository.save(accommodation);
@@ -43,6 +46,18 @@ public class AdminStayServiceImpl implements AdminStayService {
         return reserveRepository.findAll().stream()
                 .map(adminStayListResponse::from)
                 .toList();
+    }
+
+    /**
+     * 숙소 정보 조회(단건)
+     * @param stayId 조회 대상 ID
+     * @return 조회 정보
+     */
+    @Override
+    public StayDetailResponse getStayDetail(Long stayId) {
+        Stay stay = reserveRepository.findById(stayId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 숙소가 존재하지 않습니다."));
+        return StayDetailResponse.from(stay);
     }
 
     /**

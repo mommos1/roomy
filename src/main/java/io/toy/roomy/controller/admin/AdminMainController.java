@@ -2,6 +2,7 @@ package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.common.CommonUtil;
 import io.toy.roomy.dto.response.admin.RoomDetailResponse;
+import io.toy.roomy.dto.response.admin.StayDetailResponse;
 import io.toy.roomy.dto.response.admin.adminRoomListResponse;
 import io.toy.roomy.dto.response.admin.adminStayListResponse;
 import io.toy.roomy.service.AdminRoomService;
@@ -62,6 +63,23 @@ public class AdminMainController {
     }
 
     /**
+     * 숙소 수정 페이지
+     * @param model title, css, content
+     * @param stayId 숙소 id값
+     * @return adminLayout
+     */
+    @GetMapping("/stay/updatePage")
+    public String adminStayUpdatePage(
+            @RequestParam("stayId") Long stayId,
+            Model model) {
+        StayDetailResponse stayDetail = adminStayService.getStayDetail(stayId);
+        model.addAttribute("stay", stayDetail);
+        model.addAttribute("stayId", stayId);
+
+        return CommonUtil.commonModelAdminLayout(model, "admin/adminUpdateStay");
+    }
+
+    /**
      * 객실 관리 페이지
      * @param model title, css, content
      * @param stayId 숙소 id값
@@ -91,7 +109,7 @@ public class AdminMainController {
     /**
      * 객실 수정 페이지
      * @param model title, css, content
-     * @param roomId 숙소 id값
+     * @param roomId 객실 id값
      * @return adminLayout
      */
     @GetMapping("/room/updatePage")

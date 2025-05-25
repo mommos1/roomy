@@ -14,4 +14,5 @@ public class StayRequest {
     private String location;
     private StayType type;
     private String filePath;
+    private String OrgFileName;
 }
