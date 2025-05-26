@@ -1,6 +1,8 @@
 package io.toy.roomy.domain;
 
 import io.toy.roomy.domain.type.StayType;
+import io.toy.roomy.dto.request.RoomUpdateRequest;
+import io.toy.roomy.dto.request.StayUpdateRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +31,14 @@ public class Stay {
     private String orgFileName;
 
     private LocalDateTime regDt;
+
+    public void update(StayUpdateRequest dto) {
+        this.name = dto.getName();
+        this.location = dto.getLocation();
+        this.type = dto.getType();
+        this.filePath = dto.getFilePath();
+        this.orgFileName = dto.getOrgFileName();
+    }
 
     @PrePersist
     public void prePersist() {

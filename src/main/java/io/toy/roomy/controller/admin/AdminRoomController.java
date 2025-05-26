@@ -29,17 +29,6 @@ public class AdminRoomController {
     }
 
     /**
-     * 객실 삭제
-     * @param roomId 삭제 객실 ID
-     * @return 응답 메시지
-     */
-    @DeleteMapping("/{roomId}")
-    public ResponseEntity<?> deleteRoom(@PathVariable Long roomId) {
-        adminRoomService.deleteRoom(roomId);
-        return ResponseEntity.ok(ApiResponse.success("객실 삭제 성공"));
-    }
-
-    /**
      * 객실 수정
      * @param roomId 수정 객실 ID
      * @return 응답 메시지
@@ -50,5 +39,16 @@ public class AdminRoomController {
             @RequestBody RoomUpdateRequest dto) {
         adminRoomService.updateRoom(roomId, dto);
         return ResponseEntity.ok(ApiResponse.success("객실 수정 성공"));
+    }
+
+    /**
+     * 객실 삭제
+     * @param roomId 삭제 객실 ID
+     * @return 응답 메시지
+     */
+    @DeleteMapping("/{roomId}")
+    public ResponseEntity<?> deleteRoom(@PathVariable Long roomId) {
+        adminRoomService.deleteRoom(roomId);
+        return ResponseEntity.ok(ApiResponse.success("객실 삭제 성공"));
     }
 }

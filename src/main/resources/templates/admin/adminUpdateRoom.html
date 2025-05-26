@@ -31,12 +31,17 @@
             </div>
 
             <div class="form-actions">
-                <button type="button" onclick="updateRoom();">수정하기</button>
+                <button type="button" onclick="updateRoom();">수정</button>
+                <button type="button" th:onclick="'back('+ ${stayId} +')'">취소</button>
             </div>
         </form>
     </div>
 
     <script>
+        function back(stayId) {
+            window.location = "/admin/room/list?stayId=" + stayId;
+        }
+
         //객실 수정
         function updateRoom() {
             const roomId = [[${roomId}]];

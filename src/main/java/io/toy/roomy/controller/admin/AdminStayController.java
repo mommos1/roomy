@@ -2,6 +2,7 @@ package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.common.FileUploadUtil;
 import io.toy.roomy.dto.request.StayRequest;
+import io.toy.roomy.dto.request.StayUpdateRequest;
 import io.toy.roomy.dto.response.ApiResponse;
 import io.toy.roomy.service.AdminStayService;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,32 +23,40 @@ public class AdminStayController {
         this.adminStayService = adminStayService;
     }
 
-    @Value("${path.project}")
-    private String projectPath;
-
     /**
      * 숙소 등록
-     * @param dto
-     * @param image
-     * @return
+     * @param dto 숙소 정보
+     * @param image 숙소 대표 이미지
+     * @return 등록 결과
      */
-    @PostMapping("/regStay")
+    @PostMapping
     public ResponseEntity<?> adminRegStay(
             @RequestPart("stayDto") StayRequest dto,
             @RequestPart("imageFile") MultipartFile image) {
 
         try {
-            String uploadDir = projectPath + "/resources/static/images/stayRegImage"; // 원하는 저장 경로
-            String filePath = FileUploadUtil.saveFile(image, uploadDir);
-
-            // savedFileName을 DB에 저장하거나, Stay 엔티티에 포함시키기
-            // 예: stay.setImageUrl("/images/" + savedFileName);
-            dto.setOrgFileName(image.getOriginalFilename());
-            dto.setFilePath("/images/stayRegImage/" + filePath);
-
-            adminStayService.regStay(dto);
+            adminStayService.regStay(dto, image);
             return ResponseEntity.ok(ApiResponse.success("숙소 등록 성공"));
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 저장 실패: " + e.getMessage());
+        }
+    }
 
+    /**
+     * 숙소 수정
+     * @param dto
+     * @param image
+     * @return
+     */
+    @PutMapping("/{stayId}")
+    public ResponseEntity<?> adminUpdateStay(
+            @PathVariable Long stayId,
+            @RequestPart("stayDto") StayUpdateRequest dto,
+            @RequestPart("imageFile") MultipartFile image) {
+        
+        try {
+            adminStayService.updateStay(dto, image);
+            return ResponseEntity.ok(ApiResponse.success("숙소 수정 성공"));
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 저장 실패: " + e.getMessage());
         }
@@ -59,7 +68,7 @@ public class AdminStayController {
      * @return 응답 메시지
      */
     @DeleteMapping("/{stayId}")
-    public ResponseEntity<?> deleteStay(@PathVariable Long stayId) {
+    public ResponseEntity<?> adminDeleteStay(@PathVariable Long stayId) {
         adminStayService.deleteStay(stayId);
         return ResponseEntity.ok(ApiResponse.success("숙소 삭제 성공"));
     }

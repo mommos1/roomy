@@ -114,11 +114,13 @@ public class AdminMainController {
      */
     @GetMapping("/room/updatePage")
     public String adminRoomUpdatePage(
+            @RequestParam("stayId") Long stayId,
             @RequestParam("roomId") Long roomId,
             Model model) {
         RoomDetailResponse roomDetail = adminRoomService.getRoomDetail(roomId);
         model.addAttribute("room", roomDetail);
         model.addAttribute("roomId", roomId);
+        model.addAttribute("stayId", stayId);
 
         return CommonUtil.commonModelAdminLayout(model, "admin/adminUpdateRoom");
     }

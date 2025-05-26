@@ -34,7 +34,6 @@ public class Room {
     @JoinColumn(name = "stay_id")
     private Stay stay;
 
-
     public void update(RoomUpdateRequest dto) {
         this.name = dto.getName();
         this.capacity = dto.getCapacity();
