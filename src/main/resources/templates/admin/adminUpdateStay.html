@@ -11,7 +11,7 @@
 
         <form method="post" enctype="multipart/form-data" class="accommodation-form">
             <div>
-                <label>현재 이미지:</label><br>
+                <label>현재 이미지: [[${stay.orgFileName}]]</label><br>
                 <img th:src="@{${stay.filePath}}" alt="미리보기" width="150">
             </div>
 
@@ -55,11 +55,8 @@
             const name = $('#name').val();
             const location = $('#location').val();
             const type = $('#type').val();
+            const orgFilePath = "[[${stay.filePath}]]";
 
-            if (!image) {
-                alert("이미지를 첨부해주세요.");
-                return;
-            }
             if (!name) {
                 alert("이름을 입력해주세요.");
                 return;
@@ -75,16 +72,17 @@
 
             const formData = new FormData();
             const dto = {
-                name: name,
-                location: location,
-                type: type
+                name : name,
+                location : location,
+                type : type,
+                orgFilePath : orgFilePath
             };
 
             formData.append("stayDto", new Blob([JSON.stringify(dto)], { type: "application/json" }));
             formData.append("imageFile", image);
 
             $.ajax({
-                url: "/admin/stay/regStay",
+                url: "/admin/stay/" + stayId,
                 type: "PUT",
                 processData: false,
                 contentType: false,

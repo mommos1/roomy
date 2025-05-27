@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public class FileUploadUtil {
 
-    private static final String projectPath = "D:/jb/study/roomy/src/main";
-    //private static final String projectPath = "C:/myIntellij/roomy/src/main";
+    private static final String projectPath = "D:/jb/study/roomy/src/main/resources/static";
+    //private static final String projectPath = "C:/myIntellij/roomy/src/main/resources/static";
 
     public static String saveFile(MultipartFile file, String filePath) throws IOException {
         filePath = projectPath + filePath;

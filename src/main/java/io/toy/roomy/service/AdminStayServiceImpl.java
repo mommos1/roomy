@@ -26,7 +26,7 @@ public class AdminStayServiceImpl implements AdminStayService {
     }
     
     //숙소 대표이미지 저장 경로
-    private final String uploadDir = "/resources/static/images/stayRegImage";
+    private final String uploadDir = "/images/stayRegImage";
 
     /**
      * 숙소 등록
@@ -84,12 +84,12 @@ public class AdminStayServiceImpl implements AdminStayService {
             StayUpdateRequest dto,
             MultipartFile image) throws IOException {
 
-        if (!image.isEmpty()) {
+        if (image != null && !image.isEmpty()) {
             //파일 삭제 후 저장
-            FileUploadUtil.deleteFile(dto.getFilePath());
+            FileUploadUtil.deleteFile(dto.getOrgFilePath());
             String filePath = FileUploadUtil.saveFile(image, uploadDir);
             
-            dto.setFilePath(filePath);
+            dto.setFilePath(uploadDir + "/" + filePath);
             dto.setOrgFileName(image.getOriginalFilename());
         }
 

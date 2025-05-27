@@ -52,9 +52,10 @@ public class AdminStayController {
     public ResponseEntity<?> adminUpdateStay(
             @PathVariable Long stayId,
             @RequestPart("stayDto") StayUpdateRequest dto,
-            @RequestPart("imageFile") MultipartFile image) {
+            @RequestPart(value = "imageFile", required = false) MultipartFile image) {
         
         try {
+            dto.setId(stayId);
             adminStayService.updateStay(dto, image);
             return ResponseEntity.ok(ApiResponse.success("숙소 수정 성공"));
         } catch (IOException e) {
