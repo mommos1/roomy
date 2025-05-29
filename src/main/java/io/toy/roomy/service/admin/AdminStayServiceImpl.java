@@ -1,28 +1,29 @@
-package io.toy.roomy.service;
+package io.toy.roomy.service.admin;
 
 import io.toy.roomy.common.FileUploadUtil;
-import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
-import io.toy.roomy.dto.request.StayRequest;
-import io.toy.roomy.dto.request.StayUpdateRequest;
-import io.toy.roomy.dto.response.admin.StayDetailResponse;
-import io.toy.roomy.dto.response.admin.adminStayListResponse;
+import io.toy.roomy.dto.request.stay.StayRequest;
+import io.toy.roomy.dto.request.stay.StayUpdateRequest;
+import io.toy.roomy.dto.response.stay.StayDetailResponse;
+import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.repository.StayRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *
+ */
 @Service
 public class AdminStayServiceImpl implements AdminStayService {
 
-    private final StayRepository reserveRepository;
+    private final StayRepository stayRepository;
 
     public AdminStayServiceImpl(StayRepository reserveRepository) {
-        this.reserveRepository = reserveRepository;
+        this.stayRepository = reserveRepository;
     }
     
     //숙소 대표이미지 저장 경로
@@ -52,7 +53,7 @@ public class AdminStayServiceImpl implements AdminStayService {
                 .filePath("/images/stayRegImage/" + filePath)
                 .build();
 
-        reserveRepository.save(stay);
+        stayRepository.save(stay);
     }
 
     /**
@@ -60,9 +61,9 @@ public class AdminStayServiceImpl implements AdminStayService {
      * @return 숙소 목록
      */
     @Override
-    public List<adminStayListResponse> getAll() {
-        return reserveRepository.findAll().stream()
-                .map(adminStayListResponse::from)
+    public List<StayListResponse> getAll() {
+        return stayRepository.findAll().stream()
+                .map(StayListResponse::from)
                 .toList();
     }
 
@@ -73,11 +74,17 @@ public class AdminStayServiceImpl implements AdminStayService {
      */
     @Override
     public StayDetailResponse getStayDetail(Long stayId) {
-        Stay stay = reserveRepository.findById(stayId)
+        Stay stay = stayRepository.findById(stayId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 숙소가 존재하지 않습니다."));
         return StayDetailResponse.from(stay);
     }
 
+    /**
+     * 숙소 수정
+     * @param dto 수정 정보
+     * @param image 숙소 미리보기 이미지
+     * @throws IOException 파일 등록 실패 시
+     */
     @Transactional
     @Override
     public void updateStay(
@@ -93,7 +100,7 @@ public class AdminStayServiceImpl implements AdminStayService {
             dto.setOrgFileName(image.getOriginalFilename());
         }
 
-        Stay stay = reserveRepository.findById(dto.getId())
+        Stay stay = stayRepository.findById(dto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 숙소가 존재하지 않습니다."));
         stay.update(dto);
     }
@@ -105,8 +112,10 @@ public class AdminStayServiceImpl implements AdminStayService {
     @Transactional
     @Override
     public void deleteStay(Long stayId) {
-        Stay stay = reserveRepository.findById(stayId)
+        Stay stay = stayRepository.findById(stayId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 숙소가 존재하지 않습니다."));
-        reserveRepository.delete(stay);
+
+        FileUploadUtil.deleteFile(stay.getFilePath());
+        stayRepository.delete(stay);
     }
 }

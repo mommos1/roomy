@@ -1,12 +1,15 @@
 package io.toy.roomy.controller.admin;
 
-import io.toy.roomy.dto.request.RoomRequest;
-import io.toy.roomy.dto.request.RoomUpdateRequest;
+import io.toy.roomy.dto.request.room.RoomRequest;
+import io.toy.roomy.dto.request.room.RoomUpdateRequest;
 import io.toy.roomy.dto.response.ApiResponse;
-import io.toy.roomy.service.AdminRoomService;
+import io.toy.roomy.service.admin.AdminRoomService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 관리자페이지 내 객실 관련 RestController
+ */
 @RestController
 @RequestMapping("/admin/room")
 public class AdminRoomController {

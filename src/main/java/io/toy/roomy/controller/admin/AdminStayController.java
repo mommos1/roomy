@@ -1,11 +1,9 @@
 package io.toy.roomy.controller.admin;
 
-import io.toy.roomy.common.FileUploadUtil;
-import io.toy.roomy.dto.request.StayRequest;
-import io.toy.roomy.dto.request.StayUpdateRequest;
+import io.toy.roomy.dto.request.stay.StayRequest;
+import io.toy.roomy.dto.request.stay.StayUpdateRequest;
 import io.toy.roomy.dto.response.ApiResponse;
-import io.toy.roomy.service.AdminStayService;
-import org.springframework.beans.factory.annotation.Value;
+import io.toy.roomy.service.admin.AdminStayService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+/**
+ * 관리자페이지 내 숙소 관련 RestController
+ */
 @RestController
 @RequestMapping("/admin/stay")
 public class AdminStayController {

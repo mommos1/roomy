@@ -1,10 +1,9 @@
-package io.toy.roomy.dto.request;
+package io.toy.roomy.dto.request.stay;
 
 import io.toy.roomy.domain.type.StayType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter

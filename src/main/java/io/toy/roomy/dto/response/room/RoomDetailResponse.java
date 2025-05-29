@@ -1,8 +1,11 @@
-package io.toy.roomy.dto.response.admin;
+package io.toy.roomy.dto.response.room;
 
 import io.toy.roomy.domain.Room;
 import lombok.Getter;
 
+/**
+ * 객실 정보 조회 시 사용
+ */
 @Getter
 public class RoomDetailResponse {
     private Long id;

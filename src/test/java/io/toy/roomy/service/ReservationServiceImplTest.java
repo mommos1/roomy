@@ -1,9 +1,9 @@
 package io.toy.roomy.service;
 
-import io.toy.roomy.domain.Stay;
 import io.toy.roomy.domain.type.StayType;
-import io.toy.roomy.dto.request.StayRequest;
+import io.toy.roomy.dto.request.stay.StayRequest;
 import io.toy.roomy.repository.StayRepository;
+import io.toy.roomy.service.admin.AdminStayService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

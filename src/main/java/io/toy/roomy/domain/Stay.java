@@ -1,8 +1,7 @@
 package io.toy.roomy.domain;
 
 import io.toy.roomy.domain.type.StayType;
-import io.toy.roomy.dto.request.RoomUpdateRequest;
-import io.toy.roomy.dto.request.StayUpdateRequest;
+import io.toy.roomy.dto.request.stay.StayUpdateRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

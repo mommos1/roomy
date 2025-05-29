@@ -1,11 +1,14 @@
-package io.toy.roomy.service;
+package io.toy.roomy.service.user;
 
-import io.toy.roomy.dto.response.user.userStayListResponse;
+import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.repository.StayRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 사용자 숙소 Service
+ */
 @Service
 public class UserStayServiceImpl implements UserStayService {
 
@@ -15,10 +18,14 @@ public class UserStayServiceImpl implements UserStayService {
         this.reserveRepository = reserveRepository;
     }
 
+    /**
+     * 숙소 목록 조회
+     * @return 숙소 목록
+     */
     @Override
-    public List<userStayListResponse> getStayListAll() {
+    public List<StayListResponse> getStayListAll() {
         return reserveRepository.findAll().stream()
-                .map(userStayListResponse::from)
+                .map(StayListResponse::from)
                 .toList();
     }
 }

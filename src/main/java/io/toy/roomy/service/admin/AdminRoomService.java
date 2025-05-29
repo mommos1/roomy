@@ -1,11 +1,10 @@
-package io.toy.roomy.service;
+package io.toy.roomy.service.admin;
 
 import io.toy.roomy.domain.Room;
-import io.toy.roomy.dto.request.RoomRequest;
-import io.toy.roomy.dto.request.RoomUpdateRequest;
-import io.toy.roomy.dto.response.admin.RoomDetailResponse;
-import io.toy.roomy.dto.response.admin.adminRoomListResponse;
-import io.toy.roomy.dto.response.admin.adminStayListResponse;
+import io.toy.roomy.dto.request.room.RoomRequest;
+import io.toy.roomy.dto.request.room.RoomUpdateRequest;
+import io.toy.roomy.dto.response.room.RoomDetailResponse;
+import io.toy.roomy.dto.response.room.adminRoomListResponse;
 
 import java.util.List;
 

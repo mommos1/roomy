@@ -1,9 +1,12 @@
-package io.toy.roomy.dto.response.admin;
+package io.toy.roomy.dto.response.room;
 
 import io.toy.roomy.domain.Room;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * 관리자페이지 내 객실 목록 조회 시 사용
+ */
 @Builder
 @Getter
 public class adminRoomListResponse {

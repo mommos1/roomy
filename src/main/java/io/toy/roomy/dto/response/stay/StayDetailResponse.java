@@ -1,10 +1,12 @@
-package io.toy.roomy.dto.response.admin;
+package io.toy.roomy.dto.response.stay;
 
-import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.domain.type.StayType;
 import lombok.Getter;
 
+/**
+ * 숙소 정보 조회 시 사용
+ */
 @Getter
 public class StayDetailResponse {
     private Long id;

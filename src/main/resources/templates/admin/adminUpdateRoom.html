@@ -79,7 +79,7 @@
                 }),
                 success: function(data) {
                     alert("수정이 완료되었습니다.");
-                    location.reload();
+                    window.location="/admin/room/list?stayId=" + [[${stayId}]];
                 },
                 error: function(xhr) {
                     alert("수정 중 오류 발생: " + xhr.responseText);
