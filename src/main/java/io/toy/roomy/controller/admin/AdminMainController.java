@@ -1,9 +1,9 @@
 package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.common.CommonUtil;
-import io.toy.roomy.dto.response.room.RoomDetailResponse;
-import io.toy.roomy.dto.response.stay.StayDetailResponse;
-import io.toy.roomy.dto.response.room.adminRoomListResponse;
+import io.toy.roomy.dto.response.room.RoomDetailRecord;
+import io.toy.roomy.dto.response.stay.StayDetailRecord;
+import io.toy.roomy.dto.response.room.AdminRoomListResponse;
 import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.service.admin.AdminRoomService;
 import io.toy.roomy.service.admin.AdminStayService;
@@ -72,7 +72,7 @@ public class AdminMainController {
     public String adminStayUpdatePage(
             @RequestParam("stayId") Long stayId,
             Model model) {
-        StayDetailResponse stayDetail = adminStayService.getStayDetail(stayId);
+        StayDetailRecord stayDetail = adminStayService.getStayDetail(stayId);
         model.addAttribute("stay", stayDetail);
         model.addAttribute("stayId", stayId);
 
@@ -87,7 +87,7 @@ public class AdminMainController {
      */
     @GetMapping("/room/list")
     public String adminRoomList(@RequestParam("stayId") Long stayId, Model model) {
-        List<adminRoomListResponse> adminRoomList = adminRoomService.getRoomList(stayId);
+        List<AdminRoomListResponse> adminRoomList = adminRoomService.getRoomList(stayId);
 
         model.addAttribute("stayId", stayId);
         model.addAttribute("adminRoomList", adminRoomList);
@@ -117,7 +117,7 @@ public class AdminMainController {
             @RequestParam("stayId") Long stayId,
             @RequestParam("roomId") Long roomId,
             Model model) {
-        RoomDetailResponse roomDetail = adminRoomService.getRoomDetail(roomId);
+        RoomDetailRecord roomDetail = adminRoomService.getRoomDetail(roomId);
         model.addAttribute("room", roomDetail);
         model.addAttribute("roomId", roomId);
         model.addAttribute("stayId", stayId);

@@ -4,9 +4,10 @@ import io.toy.roomy.common.FileUploadUtil;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.stay.StayRequest;
 import io.toy.roomy.dto.request.stay.StayUpdateRequest;
-import io.toy.roomy.dto.response.stay.StayDetailResponse;
+import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.repository.StayRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,10 +74,10 @@ public class AdminStayServiceImpl implements AdminStayService {
      * @return 조회 정보
      */
     @Override
-    public StayDetailResponse getStayDetail(Long stayId) {
+    public StayDetailRecord getStayDetail(Long stayId) {
         Stay stay = stayRepository.findById(stayId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 숙소가 존재하지 않습니다."));
-        return StayDetailResponse.from(stay);
+                .orElseThrow(() -> new EntityNotFoundException("해당 숙소가 존재하지 않습니다."));
+        return StayDetailRecord.from(stay);
     }
 
     /**
@@ -101,7 +102,7 @@ public class AdminStayServiceImpl implements AdminStayService {
         }
 
         Stay stay = stayRepository.findById(dto.getId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 숙소가 존재하지 않습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("해당 숙소가 존재하지 않습니다."));
         stay.update(dto);
     }
 
@@ -113,7 +114,7 @@ public class AdminStayServiceImpl implements AdminStayService {
     @Override
     public void deleteStay(Long stayId) {
         Stay stay = stayRepository.findById(stayId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 숙소가 존재하지 않습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("해당 숙소가 존재하지 않습니다."));
 
         FileUploadUtil.deleteFile(stay.getFilePath());
         stayRepository.delete(stay);

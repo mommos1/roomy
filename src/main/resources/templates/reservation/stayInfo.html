@@ -17,8 +17,8 @@
 
             <!-- 숙소 이름, 위치 -->
             <div class="info">
-                <h1>호텔 야놀자 강남점</h1>
-                <p>서울특별시 강남구 테헤란로 123</p>
+                <h1 th:text="${stayDetail.name}">호텔 야놀자 강남점</h1>
+                <p th:text="${stayDetail.location}">서울특별시 강남구 테헤란로 123</p>
             </div>
 
             <!-- 후기 리스트 -->
@@ -45,19 +45,13 @@
 
             <!-- 객실 리스트 -->
             <div class="rooms">
-                <div class="room-item">
-                    <h3>디럭스 룸</h3>
-                    <p>퀸사이즈 침대, 무료 Wi-Fi, 조식 포함</p>
-                    <p>₩80,000 / 1박</p>
+                <div th:each="room : ${roomDetail}" class="room-item">
+                    <h3 th:text="${room.name}">디럭스 룸</h3>
+                    <p th:text="${room.description}">퀸사이즈 침대, 무료 Wi-Fi, 조식 포함</p>
+                    <p th:text="'₩' +${room.pricePerNight}+ ' / ' +${room.capacity}+ '인'">₩80,000 / 1박</p>
                     <button>예약하기</button>
                 </div>
 
-                <div class="room-item">
-                    <h3>스위트 룸</h3>
-                    <p>킹사이즈 침대, 욕조, 시티뷰</p>
-                    <p>₩150,000 / 1박</p>
-                    <button>예약하기</button>
-                </div>
             </div>
         </div>
     </div>

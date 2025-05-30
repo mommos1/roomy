@@ -19,7 +19,7 @@
                         <h3 th:text="${userStayList.name}">숙소이름</h3>
                         <p>최대 수용 인원: 30명</p>
                         <p>50,000원 ~</p>
-                        <button onclick="goInfoPage();">예약하기</button>
+                        <button th:onclick="'goInfoPage('+ ${userStayList.id} +');'">예약하기</button>
                     </div>
                 </th:block>
 
@@ -31,8 +31,8 @@
     </div>
 
     <script>
-        function goInfoPage() {
-            window.location = "/stay/info";
+        function goInfoPage(id) {
+            window.location = "/stay/info/" + id;
         }
     </script>
 </th:block>

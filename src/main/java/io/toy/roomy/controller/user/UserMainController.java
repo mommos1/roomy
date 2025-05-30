@@ -1,6 +1,8 @@
 package io.toy.roomy.controller.user;
 
 import io.toy.roomy.common.CommonUtil;
+import io.toy.roomy.dto.response.room.RoomDetailRecord;
+import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.service.user.UserStayService;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,12 @@ public class UserMainController {
     @GetMapping("/info/{stayId}")
     public String getUserStayInfoPage(Model model,
               @PathVariable Long stayId) {
+
+        StayDetailRecord stayDetail = userStayService.getStayDetail(stayId);
+        List<RoomDetailRecord> roomDetail = userStayService.getRoomsByStayID(stayId);
+
+        model.addAttribute("stayDetail", stayDetail);
+        model.addAttribute("roomDetail", roomDetail);
 
         return CommonUtil.commonModelLayout(model, "reservation/stayInfo");
     }

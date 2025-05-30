@@ -4,8 +4,8 @@ import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.room.RoomRequest;
 import io.toy.roomy.dto.request.room.RoomUpdateRequest;
-import io.toy.roomy.dto.response.room.RoomDetailResponse;
-import io.toy.roomy.dto.response.room.adminRoomListResponse;
+import io.toy.roomy.dto.response.room.RoomDetailRecord;
+import io.toy.roomy.dto.response.room.AdminRoomListResponse;
 import io.toy.roomy.repository.RoomRepository;
 import io.toy.roomy.repository.StayRepository;
 import jakarta.transaction.Transactional;
@@ -30,9 +30,9 @@ public class AdminRoomServiceImpl implements AdminRoomService {
      * @return 객실 목록
      */
     @Override
-    public List<adminRoomListResponse> getRoomList(Long stayId) {
+    public List<AdminRoomListResponse> getRoomList(Long stayId) {
         return roomRepository.findByStayId(stayId).stream()
-                .map(adminRoomListResponse::from)
+                .map(AdminRoomListResponse::from)
                 .toList();
     }
 
@@ -42,10 +42,10 @@ public class AdminRoomServiceImpl implements AdminRoomService {
      * @return 조회 정보
      */
     @Override
-    public RoomDetailResponse getRoomDetail(Long roomId) {
+    public RoomDetailRecord getRoomDetail(Long roomId) {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 객실이 존재하지 않습니다."));
-        return RoomDetailResponse.from(room);
+        return RoomDetailRecord.from(room);
     }
 
     /**

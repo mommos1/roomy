@@ -9,15 +9,15 @@ import lombok.Getter;
  */
 @Builder
 @Getter
-public class adminRoomListResponse {
+public class AdminRoomListResponse {
     private Long id;
     private String name;
     private int pricePerNight;
     private int capacity;
     private String description;
 
-    public static adminRoomListResponse from(Room room) {
-        return adminRoomListResponse.builder()
+    public static AdminRoomListResponse from(Room room) {
+        return AdminRoomListResponse.builder()
                 .id(room.getId())
                 .name(room.getName())
                 .pricePerNight(room.getPricePerNight())

@@ -5,7 +5,7 @@ import io.toy.roomy.domain.Stay;
 import io.toy.roomy.domain.type.StayType;
 import io.toy.roomy.dto.request.stay.StayRequest;
 import io.toy.roomy.dto.request.stay.StayUpdateRequest;
-import io.toy.roomy.dto.response.stay.StayDetailResponse;
+import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.repository.StayRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -170,7 +170,7 @@ class AdminStayServiceImplTest {
         given(stayRepository.findById(stayFixture.getId())).willReturn(Optional.of(stayFixture));
 
         // when
-        StayDetailResponse result = adminStayService.getStayDetail(stayFixture.getId());
+        StayDetailRecord result = adminStayService.getStayDetail(stayFixture.getId());
 
         // then
         assertThat(result).isNotNull();

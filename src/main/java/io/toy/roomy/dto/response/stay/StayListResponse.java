@@ -17,6 +17,7 @@ public class StayListResponse {
     private String location;
     private String type;
     private LocalDateTime regDt;
+    private String filePath;
 
     public static StayListResponse from(Stay stay) {
         return StayListResponse.builder()
@@ -25,6 +26,7 @@ public class StayListResponse {
                 .location(stay.getLocation())
                 .type(stay.getType().name())
                 .regDt(stay.getRegDt())
+                .filePath(stay.getFilePath())
                 .build();
     }
 }
