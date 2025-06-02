@@ -1,9 +1,11 @@
-package io.toy.roomy.service.admin;
+package io.toy.roomy.service;
 
 import io.toy.roomy.common.FileUploadUtil;
+import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.stay.StayRequest;
 import io.toy.roomy.dto.request.stay.StayUpdateRequest;
+import io.toy.roomy.dto.response.room.RoomDetailRecord;
 import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.repository.StayRepository;
@@ -19,11 +21,11 @@ import java.util.List;
  *
  */
 @Service
-public class AdminStayServiceImpl implements AdminStayService {
+public class StayServiceImpl implements StayService {
 
     private final StayRepository stayRepository;
 
-    public AdminStayServiceImpl(StayRepository reserveRepository) {
+    public StayServiceImpl(StayRepository reserveRepository) {
         this.stayRepository = reserveRepository;
     }
     
@@ -62,7 +64,7 @@ public class AdminStayServiceImpl implements AdminStayService {
      * @return 숙소 목록
      */
     @Override
-    public List<StayListResponse> getAll() {
+    public List<StayListResponse> getStayList() {
         return stayRepository.findAll().stream()
                 .map(StayListResponse::from)
                 .toList();
@@ -118,5 +120,24 @@ public class AdminStayServiceImpl implements AdminStayService {
 
         FileUploadUtil.deleteFile(stay.getFilePath());
         stayRepository.delete(stay);
+    }
+
+    /**
+     * 숙소에 연결된 객실 목록조회
+     * @param stayId 숙소 ID
+     * @return List<객실 정보>
+     */
+    @Override
+    public List<RoomDetailRecord> getRoomsByStayID(Long stayId) {
+        // StayRepository를 통해 특정 Stay 객체를 조회
+        Stay stay = stayRepository.findById(stayId)
+                .orElseThrow(() -> new EntityNotFoundException("ID가" + stayId + "인 숙소를 찾을 수 없습니다."));
+
+        // 이 Stay 객체에 속한 Room 리스트를 가져옵니다.
+        List<Room> roomsOfThisStay = stay.getRooms();
+
+        return roomsOfThisStay.stream()
+                .map(RoomDetailRecord::from)
+                .toList();
     }
 }

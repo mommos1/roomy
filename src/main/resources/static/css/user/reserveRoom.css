@@ -1,0 +1,186 @@
+.reservation-container {
+    width: 90%;
+    max-width: 760px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.page-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 2em;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #4a90e2;
+}
+
+.section-title {
+    font-size: 1.6em;
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.sub-section-title {
+    font-size: 1.3em;
+    color: #555;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.room-info-section .room-details {
+    display: flex;
+    gap: 25px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.room-info-section .room-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    background-color: #eee; /* 이미지 없을 때 배경색 */
+}
+
+.room-info-section .room-text-details p {
+    margin: 6px 0;
+    line-height: 1.7;
+    color: #495057;
+    font-size: 0.95em;
+}
+
+.room-info-section .room-text-details p strong {
+    color: #212529;
+    min-width: 90px;
+    display: inline-block;
+}
+
+.reservation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.reservation-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.reservation-form .form-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 1em;
+}
+
+.reservation-form .form-group input[type="date"],
+.reservation-form .form-group input[type="number"],
+.reservation-form .form-group input[type="text"],
+.reservation-form .form-group input[type="tel"],
+.reservation-form .form-group input[type="email"] {
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 0.95em;
+    box-sizing: border-box;
+    width: 100%;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.reservation-form .form-group input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+.reservation-form .form-group input[type="number"]#numberOfGuests {
+    width: 150px;
+}
+
+.total-price-section {
+    margin-top: 25px;
+    padding: 18px;
+    background-color: #e9f5ff;
+    border: 1px solid #b3d7ff;
+    border-radius: 6px;
+    text-align: right;
+}
+
+.total-price-section p {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+.total-price-section #totalPriceDisplay {
+    font-size: 1.1em;
+}
+
+.total-price-section small {
+    display: block;
+    font-size: 0.85em;
+    color: #555;
+    margin-top: 6px;
+}
+
+.submit-button {
+    background-color: #28a745;
+    color: white;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.25s ease, transform 0.1s ease;
+    margin-top: 15px;
+    letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .reservation-container {
+        width: 95%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .room-info-section .room-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .room-info-section .room-image {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .page-title {
+        font-size: 1.8em;
+    }
+
+    .section-title {
+        font-size: 1.4em;
+    }
+}

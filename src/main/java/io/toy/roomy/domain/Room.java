@@ -4,6 +4,9 @@ import io.toy.roomy.dto.request.room.RoomUpdateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -30,6 +33,9 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stay_id")
     private Stay stay;
+
+    @OneToMany(mappedBy = "room")
+    private List<Reservation> reservations = new ArrayList<>();
 
     public void update(RoomUpdateRequest dto) {
         this.name = dto.getName();

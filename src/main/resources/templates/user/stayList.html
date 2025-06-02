@@ -4,14 +4,33 @@
 </th:block>
 
 <th:block th:fragment="css">
-    <link rel="stylesheet" href="/css/reservation/stayList.css">
+    <link rel="stylesheet" href="/css/user/stayList.css">
 </th:block>
 
 <th:block th:fragment="content">
     <div class="accommodation-wrapper">
         <div class="accommodation-container">
 
+            <div class="search-filters">
+                <div class="filter-group">
+                    <label for="checkin-date">체크인 날짜</label>
+                    <input type="date" id="checkin-date" name="checkinDate">
+                </div>
+                <div class="filter-group">
+                    <label for="checkout-date">체크아웃 날짜</label>
+                    <input type="date" id="checkout-date" name="checkoutDate">
+                </div>
+                <div class="filter-group">
+                    <label for="guest-count">인원</label>
+                    <input type="number" id="guest-count" name="guestCount" min="1" value="1">
+                </div>
+                <div class="filter-group">
+                    <button type="button" id="search-button">조건 검색</button>
+                </div>
+            </div>
+
             <h2>숙소 목록</h2>
+
             <div class="accommodation-list">
                 <th:block th:if="${userStayList != null and !#lists.isEmpty(userStayList)}">
                     <div th:each="userStayList : ${userStayList}" class="accommodation-card">

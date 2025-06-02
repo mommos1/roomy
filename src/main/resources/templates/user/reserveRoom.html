@@ -1,0 +1,104 @@
+
+<th:block th:fragment="title">
+    <title>객실 예약 페이지</title>
+</th:block>
+
+<th:block th:fragment="css">
+    <link rel="stylesheet" href="/css/user/reserveRoom.css">
+</th:block>
+
+<th:block th:fragment="content">
+    <div class="reservation-container">
+        <h2 class="page-title">객실 예약</h2>
+
+        <section class="room-info-section">
+            <h3 class="section-title">선택하신 객실 정보</h3>
+            <div class="room-details">
+                <div class="room-text-details">
+                    <p><strong>객실명:</strong> <span th:text="${room.name}">오션뷰 스위트</span></p>
+                    <p><strong>최대 인원:</strong> <span th:text="${room.capacity}">4</span>명</p>
+                    <p><strong>가격 (1박):</strong> <span th:text="${room.pricePerNight}">250,000원</span></p>
+                    <p><strong>객실 설명:</strong> <span th:text="${room.description}">환상적인 바다 전망을 자랑하는 최고급 스위트룸입니다. 넓은 공간과 최신 시설을 갖추고 있습니다.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reservation-form-section">
+            <h3 class="section-title">예약 정보 입력</h3>
+            <form action="#" method="post" class="reservation-form" id="reservationForm">
+                <input type="hidden" name="roomId" value="ocean_suite_001" />
+
+                <div class="form-group">
+                    <label for="checkInDate">체크인 날짜:</label>
+                    <input type="date" id="checkInDate" name="checkInDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="checkOutDate">체크아웃 날짜:</label>
+                    <input type="date" id="checkOutDate" name="checkOutDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reservationCount">숙박 인원:</label>
+                    <input type="number" id="reservationCount" name="reservationCount" min="1" max="4" value="1" required>
+                </div>
+
+                <h4 class="sub-section-title">예약자 정보</h4>
+                <div class="form-group">
+                    <label for="reserveName">예약자명:</label>
+                    <input type="text" id="reserveName" name="reserveName" value="홍길동" required>
+                </div>
+
+<!--                <div class="form-group">
+                    <label for="guestPhone">연락처:</label>
+                    <input type="tel" id="guestPhone" name="guestPhone" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" value="010-1234-5678" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="guestEmail">이메일:</label>
+                    <input type="email" id="guestEmail" name="guestEmail" placeholder="email@example.com" value="hong@example.com" required>
+                </div>-->
+
+                <div class="total-price-section">
+                    <p><strong>총 예상 금액:</strong> <span id="totalPriceDisplay">0</span> 원</p>
+                    <small>* 정확한 금액은 날짜 및 인원 확정 후 변동될 수 있습니다.</small>
+                </div>
+
+                <button type="button" onclick="regReservation()" class="submit-button">예약하기</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        //객실 예약
+        function regReservation() {
+            const checkInDate = $("#checkInDate").val();
+            const checkOutDate = $("#checkOutDate").val();
+            const reservationCount = $("#reservationCount").val();
+            const reserveName = $("#reserveName").val();
+
+            $.ajax({
+                url: "/reserve",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    roomId : [[${roomId}]],
+                    checkInDate: checkInDate,
+                    checkOutDate: checkOutDate,
+                    reservationCount: reservationCount,
+                    reserveName: reserveName
+                }),
+                success: function(data) {
+                    alert("등록이 완료되었습니다.");
+                },
+                error: function(xhr) {
+                    if (xhr.responseJSON && xhr.responseJSON.detail) {
+                        alert(xhr.responseJSON.detail);
+                    } else {
+                        alert("알 수 없는 오류가 발생했습니다.");
+                    }
+                }
+            })
+        }
+    </script>
+</th:block>

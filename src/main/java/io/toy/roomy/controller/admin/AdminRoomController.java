@@ -3,7 +3,7 @@ package io.toy.roomy.controller.admin;
 import io.toy.roomy.dto.request.room.RoomRequest;
 import io.toy.roomy.dto.request.room.RoomUpdateRequest;
 import io.toy.roomy.dto.response.ApiResponse;
-import io.toy.roomy.service.admin.AdminRoomService;
+import io.toy.roomy.service.RoomService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin/room")
 public class AdminRoomController {
 
-    public final AdminRoomService adminRoomService;
+    public final RoomService adminRoomService;
 
-    public AdminRoomController(AdminRoomService adminRoomService) {
+    public AdminRoomController(RoomService adminRoomService) {
         this.adminRoomService = adminRoomService;
     }
 

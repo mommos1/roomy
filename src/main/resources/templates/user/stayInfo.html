@@ -4,7 +4,7 @@
 </th:block>
 
 <th:block th:fragment="css">
-    <link rel="stylesheet" href="/css/reservation/stayInfo.css">
+    <link rel="stylesheet" href="/css/user/stayInfo.css">
 </th:block>
 
 <th:block th:fragment="content">
@@ -28,7 +28,7 @@
             </div>
 
             <!-- 날짜 및 인원 선택 -->
-            <div class="reservation-options">
+<!--            <div class="reservation-options">
                 <select>
                     <option>날짜 선택</option>
                     <option>2025-05-01</option>
@@ -41,7 +41,7 @@
                     <option>2명</option>
                     <option>3명 이상</option>
                 </select>
-            </div>
+            </div>-->
 
             <!-- 객실 리스트 -->
             <div class="rooms">
@@ -49,10 +49,16 @@
                     <h3 th:text="${room.name}">디럭스 룸</h3>
                     <p th:text="${room.description}">퀸사이즈 침대, 무료 Wi-Fi, 조식 포함</p>
                     <p th:text="'₩' +${room.pricePerNight}+ ' / ' +${room.capacity}+ '인'">₩80,000 / 1박</p>
-                    <button>예약하기</button>
+                    <button th:onclick="'reserveRoom('+ ${room.id} +')'">예약하기</button>
                 </div>
 
             </div>
         </div>
     </div>
+
+    <script>
+        function reserveRoom(roomId) {
+            window.location="/reserve/room/" + roomId;
+        }
+    </script>
 </th:block>

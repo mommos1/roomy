@@ -8,6 +8,7 @@ import io.toy.roomy.dto.request.stay.StayUpdateRequest;
 import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.repository.StayRepository;
+import io.toy.roomy.service.StayServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,13 +36,13 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class) // Mockito 확장 기능 사용
-class AdminStayServiceImplTest {
+class StayServiceImplTest {
 
     @Mock // Mock 객체 생성
     private StayRepository stayRepository;
 
     @InjectMocks // @Mock으로 생성된 객체를 주입받는 실제 테스트 대상 객체
-    private AdminStayServiceImpl adminStayService;
+    private StayServiceImpl StayService;
 
     private StayRequest stayRequest;
     private MultipartFile mockImageFile;
@@ -89,7 +90,7 @@ class AdminStayServiceImplTest {
                     .thenReturn(savedFileName); // saveFile 메서드가 호출되면 savedFileName을 반환하도록 설정
 
             // when
-            adminStayService.regStay(stayRequest, mockImageFile);
+            StayService.regStay(stayRequest, mockImageFile);
 
             // then
             // stayRepository.save가 호출되었는지, 어떤 인자로 호출되었는지 검증
@@ -118,7 +119,7 @@ class AdminStayServiceImplTest {
 
             // when & then
             assertThrows(IOException.class, () -> {
-                adminStayService.regStay(stayRequest, mockImageFile);
+                StayService.regStay(stayRequest, mockImageFile);
             }, "파일 저장 중 IOException이 발생해야 합니다.");
 
             then(stayRepository).should(never()).save(any(Stay.class)); // IOException 발생 시 save는 호출되지 않아야 함
@@ -140,7 +141,7 @@ class AdminStayServiceImplTest {
         given(stayRepository.findAll()).willReturn(stays);
 
         // when
-        List<StayListResponse> result = adminStayService.getAll();
+        List<StayListResponse> result = StayService.getStayList();
 
         // then
         assertThat(result).hasSize(2);
@@ -156,7 +157,7 @@ class AdminStayServiceImplTest {
         given(stayRepository.findAll()).willReturn(List.of());
 
         // when
-        List<StayListResponse> result = adminStayService.getAll();
+        List<StayListResponse> result = StayService.getStayList();
 
         // then
         assertThat(result).isEmpty();
@@ -170,7 +171,7 @@ class AdminStayServiceImplTest {
         given(stayRepository.findById(stayFixture.getId())).willReturn(Optional.of(stayFixture));
 
         // when
-        StayDetailRecord result = adminStayService.getStayDetail(stayFixture.getId());
+        StayDetailRecord result = StayService.getStayDetail(stayFixture.getId());
 
         // then
         assertThat(result).isNotNull();
@@ -188,7 +189,7 @@ class AdminStayServiceImplTest {
 
         // when & then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            adminStayService.getStayDetail(nonExistentStayId);
+            StayService.getStayDetail(nonExistentStayId);
         });
         assertThat(exception.getMessage()).isEqualTo("해당 숙소가 존재하지 않습니다.");
         then(stayRepository).should(times(1)).findById(nonExistentStayId);
@@ -219,7 +220,7 @@ class AdminStayServiceImplTest {
                     .thenReturn(newSavedFileName);
 
             // when
-            adminStayService.updateStay(updateRequest, mockImageFile);
+            StayService.updateStay(updateRequest, mockImageFile);
 
             // then
             // FileUploadUtil.deleteFile 호출 검증
@@ -257,7 +258,7 @@ class AdminStayServiceImplTest {
         MultipartFile nullImageFile = null; // 또는 new MockMultipartFile("", new byte[0]) 등 isEmpty()가 true인 경우
 
         // when
-        adminStayService.updateStay(updateRequest, nullImageFile); // 이미지를 null로 전달
+        StayService.updateStay(updateRequest, nullImageFile); // 이미지를 null로 전달
 
         // then
         // FileUploadUtil 관련 메서드는 호출되지 않아야 함
@@ -289,7 +290,7 @@ class AdminStayServiceImplTest {
 
         // when & then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            adminStayService.updateStay(updateRequest, mockImageFile);
+            StayService.updateStay(updateRequest, mockImageFile);
         });
         assertThat(exception.getMessage()).isEqualTo("해당 숙소가 존재하지 않습니다.");
         then(stayRepository).should(times(1)).findById(nonExistentStayId);
@@ -307,7 +308,7 @@ class AdminStayServiceImplTest {
                     .then(invocation -> null); // void 메서드 mocking
 
             // when
-            assertDoesNotThrow(() -> adminStayService.deleteStay(stayFixture.getId()));
+            assertDoesNotThrow(() -> StayService.deleteStay(stayFixture.getId()));
 
             // then
             mockedFileUploadUtil.verify(() -> FileUploadUtil.deleteFile(stayFixture.getFilePath()), times(1));
@@ -324,7 +325,7 @@ class AdminStayServiceImplTest {
 
         // when & then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            adminStayService.deleteStay(nonExistentStayId);
+            StayService.deleteStay(nonExistentStayId);
         });
         assertThat(exception.getMessage()).isEqualTo("해당 숙소가 존재하지 않습니다.");
 

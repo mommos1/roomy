@@ -19,7 +19,15 @@ import java.util.List;
 @Entity
 public class Stay {
     @Id
-    @GeneratedValue
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,       // 시퀀스를 사용하겠다
+            generator = "stay_seq_generator"          // 어떤 시퀀스를? → 아래 정의된 이름
+    )
+    @SequenceGenerator(
+            name = "stay_seq_generator",              // JPA 내부에서 사용할 이름
+            sequenceName = "stay_seq",                // 실제 DB의 시퀀스 이름
+            allocationSize = 1
+    )
     private Long id;
 
     private String name;
@@ -44,7 +52,7 @@ public class Stay {
         this.regDt = LocalDateTime.now().withNano(0);;
     }
 
-    @OneToMany(mappedBy = "stay", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "stay", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Room> rooms = new ArrayList<>();
 }
 

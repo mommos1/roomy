@@ -1,0 +1,195 @@
+.accommodation-wrapper {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+header {
+    background-color: #4a90e2;
+    padding: 20px 0;
+}
+
+header .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.accommodation-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.accommodation-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.accommodation-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.accommodation-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 280px;
+    text-align: center;
+}
+
+.accommodation-card h3 {
+    margin-top: 0;
+}
+
+.accommodation-card button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.accommodation-card button:hover {
+    background-color: #357ac8;
+}
+
+footer {
+    background-color: #f0f0f0;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+.accommodation-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+/* 검색 필터 스타일 */
+.search-filters {
+    display: flex;
+    flex-wrap: wrap; /* 화면 작을 시 줄바꿈 */
+    gap: 15px; /* 각 필터 그룹 사이의 간격 */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 30px; /* 숙소 목록과의 간격 */
+    align-items: flex-end; /* 요소들을 하단 기준으로 정렬 (버튼 높이 맞춤) */
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column; /* 레이블과 입력 필드를 세로로 배치 */
+    flex-grow: 1; /* 가능한 공간을 차지하도록 함 (버튼 제외) */
+}
+
+.filter-group:last-child { /* 검색 버튼이 있는 그룹 */
+    flex-grow: 0; /* 버튼은 내용만큼만 크기 차지 */
+}
+
+.filter-group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #555;
+}
+
+.filter-group input[type="date"],
+.filter-group input[type="number"] {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+    height: 42px; /* 버튼과 높이 통일 */
+}
+
+.filter-group input[type="number"] {
+    width: 100px; /* 인원수 필드 너비 조정 */
+}
+
+.search-filters button {
+    padding: 0 20px; /* 높이가 있으므로 상하패딩 0 */
+    height: 42px; /* 입력 필드와 높이 통일 */
+    border: none;
+    background-color: #4a90e2; /* 기존 버튼 색상 */
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    /* align-self: flex-end; /* filter-group에 align-items: flex-end 사용시 불필요 */
+}
+
+.search-filters button:hover {
+    background-color: #357ac8; /* 기존 버튼 hover 색상 */
+}
+
+/* 숙소 카드 이미지 높이 고정 및 비율 유지 (선택 사항) */
+.accommodation-card img {
+    width: 100%;
+    height: 180px; /* 원하는 높이로 설정 */
+    object-fit: cover; /* 이미지가 잘리더라도 비율을 유지하며 컨테이너를 채움 */
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+/* 반응형 디자인: 작은 화면 대응 */
+@media (max-width: 768px) {
+    .search-filters {
+        flex-direction: column; /* 필터들을 세로로 쌓음 */
+        align-items: stretch; /* 필터 그룹들이 가로로 꽉 차도록 */
+    }
+
+    .filter-group input[type="date"],
+    .filter-group input[type="number"] {
+        width: 100%; /* 입력 필드 너비를 100%로 */
+    }
+
+    .search-filters button {
+        width: 100%; /* 버튼도 100% 너비 */
+        margin-top: 10px; /* 위 요소와의 간격 */
+    }
+}

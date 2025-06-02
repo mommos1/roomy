@@ -5,8 +5,8 @@ import io.toy.roomy.dto.response.room.RoomDetailRecord;
 import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.room.AdminRoomListResponse;
 import io.toy.roomy.dto.response.stay.StayListResponse;
-import io.toy.roomy.service.admin.AdminRoomService;
-import io.toy.roomy.service.admin.AdminStayService;
+import io.toy.roomy.service.RoomService;
+import io.toy.roomy.service.StayService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * 관리자페이지 이동 관련 Controller
+ * 관리자페이지 이동 GET 관련 Controller
  */
 @Controller
 @RequestMapping("/admin")
 public class AdminMainController {
 
-    private final AdminStayService adminStayService;
-    private final AdminRoomService adminRoomService;
+    private final StayService adminStayService;
+    private final RoomService adminRoomService;
 
-    public AdminMainController(AdminStayService adminStayService, AdminRoomService adminRoomService) {
+    public AdminMainController(StayService adminStayService, RoomService adminRoomService) {
         this.adminStayService = adminStayService;
         this.adminRoomService = adminRoomService;
     }
@@ -47,7 +47,7 @@ public class AdminMainController {
      */
     @GetMapping("/stay/list")
     public String adminStayList(Model model) {
-        List<StayListResponse> adminStayList = adminStayService.getAll();
+        List<StayListResponse> adminStayList = adminStayService.getStayList();
         model.addAttribute("adminStayList", adminStayList);
         return CommonUtil.commonModelAdminLayout(model, "admin/adminStayList");
     }

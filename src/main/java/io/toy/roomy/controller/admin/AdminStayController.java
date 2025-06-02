@@ -3,7 +3,7 @@ package io.toy.roomy.controller.admin;
 import io.toy.roomy.dto.request.stay.StayRequest;
 import io.toy.roomy.dto.request.stay.StayUpdateRequest;
 import io.toy.roomy.dto.response.ApiResponse;
-import io.toy.roomy.service.admin.AdminStayService;
+import io.toy.roomy.service.StayService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +18,9 @@ import java.io.IOException;
 @RequestMapping("/admin/stay")
 public class AdminStayController {
 
-    public final AdminStayService adminStayService;
+    public final StayService adminStayService;
 
-    public AdminStayController(AdminStayService adminStayService) {
+    public AdminStayController(StayService adminStayService) {
         this.adminStayService = adminStayService;
     }
 

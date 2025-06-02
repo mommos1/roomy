@@ -1,4 +1,4 @@
-package io.toy.roomy.service.admin;
+package io.toy.roomy.service;
 
 import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AdminRoomServiceImpl implements AdminRoomService {
+public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
     private final StayRepository stayRepository;
 
-    public AdminRoomServiceImpl(RoomRepository roomRepository, StayRepository stayRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, StayRepository stayRepository) {
         this.roomRepository = roomRepository;
         this.stayRepository = stayRepository;
     }

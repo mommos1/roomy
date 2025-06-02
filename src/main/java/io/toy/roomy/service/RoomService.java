@@ -1,4 +1,4 @@
-package io.toy.roomy.service.admin;
+package io.toy.roomy.service;
 
 import io.toy.roomy.domain.Room;
 import io.toy.roomy.dto.request.room.RoomRequest;
@@ -8,7 +8,7 @@ import io.toy.roomy.dto.response.room.AdminRoomListResponse;
 
 import java.util.List;
 
-public interface AdminRoomService {
+public interface RoomService {
     //객실 목록 조회
     List<AdminRoomListResponse> getRoomList(Long stayId);
     //객실 정보 조회
