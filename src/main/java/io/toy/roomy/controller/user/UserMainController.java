@@ -1,7 +1,7 @@
 package io.toy.roomy.controller.user;
 
 import io.toy.roomy.common.CommonUtil;
-import io.toy.roomy.dto.response.room.RoomDetailRecord;
+import io.toy.roomy.dto.response.room.RoomRecord;
 import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.stay.StayListResponse;
 import io.toy.roomy.service.RoomService;
@@ -45,7 +45,7 @@ public class UserMainController {
             @PathVariable Long stayId) {
 
         StayDetailRecord stayDetail = stayService.getStayDetail(stayId);
-        List<RoomDetailRecord> roomDetail = stayService.getRoomsByStayID(stayId);
+        List<RoomRecord> roomDetail = stayService.getRoomsByStayID(stayId);
 
         model.addAttribute("stayDetail", stayDetail);
         model.addAttribute("roomDetail", roomDetail);
@@ -58,7 +58,7 @@ public class UserMainController {
             Model model,
             @PathVariable Long roomId) {
 
-        RoomDetailRecord room = roomSerervice.getRoomDetail(roomId);
+        RoomRecord room = roomSerervice.getRoomDetail(roomId);
 
         model.addAttribute("room", room);
 

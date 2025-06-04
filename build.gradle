@@ -36,7 +36,21 @@ dependencies {
 	testCompileOnly("org.projectlombok:lombok:1.18.38")
 	testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
 
-	testImplementation 'org.mockito:mockito-inline:5.2.0' // 버전은 상황에 맞게
+	//mockito
+	testImplementation 'org.mockito:mockito-inline:5.2.0'
+
+	// mapper https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+	implementation("org.mapstruct:mapstruct:1.6.3")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
+	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java', 'build/generated/sources/annotationProcessor/java/main']
+		}
+	}
 }
 
 tasks.named('test') {

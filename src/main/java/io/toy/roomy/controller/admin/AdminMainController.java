@@ -1,7 +1,7 @@
 package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.common.CommonUtil;
-import io.toy.roomy.dto.response.room.RoomDetailRecord;
+import io.toy.roomy.dto.response.room.RoomRecord;
 import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.room.AdminRoomListResponse;
 import io.toy.roomy.dto.response.stay.StayListResponse;
@@ -87,7 +87,7 @@ public class AdminMainController {
      */
     @GetMapping("/room/list")
     public String adminRoomList(@RequestParam("stayId") Long stayId, Model model) {
-        List<AdminRoomListResponse> adminRoomList = adminRoomService.getRoomList(stayId);
+        List<RoomRecord> adminRoomList = adminRoomService.getRoomList(stayId);
 
         model.addAttribute("stayId", stayId);
         model.addAttribute("adminRoomList", adminRoomList);
@@ -117,7 +117,7 @@ public class AdminMainController {
             @RequestParam("stayId") Long stayId,
             @RequestParam("roomId") Long roomId,
             Model model) {
-        RoomDetailRecord roomDetail = adminRoomService.getRoomDetail(roomId);
+        RoomRecord roomDetail = adminRoomService.getRoomDetail(roomId);
         model.addAttribute("room", roomDetail);
         model.addAttribute("roomId", roomId);
         model.addAttribute("stayId", stayId);

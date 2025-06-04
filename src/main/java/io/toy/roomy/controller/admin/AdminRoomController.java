@@ -1,7 +1,6 @@
 package io.toy.roomy.controller.admin;
 
 import io.toy.roomy.dto.request.room.RoomRequest;
-import io.toy.roomy.dto.request.room.RoomUpdateRequest;
 import io.toy.roomy.dto.response.ApiResponse;
 import io.toy.roomy.service.RoomService;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +38,7 @@ public class AdminRoomController {
     @PutMapping("/{roomId}")
     public ResponseEntity<?> updateRoom(
             @PathVariable Long roomId,
-            @RequestBody RoomUpdateRequest dto) {
+            @RequestBody RoomRequest dto) {
         adminRoomService.updateRoom(roomId, dto);
         return ResponseEntity.ok(ApiResponse.success("객실 수정 성공"));
     }

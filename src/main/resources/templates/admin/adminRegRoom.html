@@ -12,12 +12,17 @@
         <form method="post" enctype="multipart/form-data" class="accommodation-form">
             <div class="form-group">
                 <label for="name">객실 이름</label>
-                <input type="text" id="name" name="name" placeholder="객실 이름 입력" required>
+                <input type="text" id="name" placeholder="객실 이름 입력" required>
             </div>
 
             <div class="form-group">
-                <label for="name">금액</label>
-                <input type="number" id="pricePerNight" name="pricePerNight" placeholder="숙소 금액 입력" required>
+                <label for="numberOfRooms">객실 개수</label>
+                <input type="number" id="numberOfRooms" placeholder="객실 개수 입력" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pricePerNight">금액</label>
+                <input type="number" id="pricePerNight" placeholder="숙소 금액 입력" required>
             </div>
 
             <div class="form-group">
@@ -27,7 +32,7 @@
 
             <div class="form-group">
                 <label for="description">설명</label>
-                <input type="text" id="description" name="description" placeholder="설명 입력" required>
+                <input type="text" id="description" placeholder="설명 입력" required>
             </div>
 
             <div class="form-actions">
@@ -40,6 +45,7 @@
         //객실 등록
         function regRoom() {
             const name = $('#name').val();
+            const numberOfRooms = $('#numberOfRooms').val();
             const pricePerNight = $('#pricePerNight').val();
             const capacity = $('#capacity').val();
             const description = $('#description').val();
@@ -68,6 +74,7 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     name: name,
+                    numberOfRooms: numberOfRooms,
                     pricePerNight: pricePerNight,
                     capacity: capacity,
                     description: description,

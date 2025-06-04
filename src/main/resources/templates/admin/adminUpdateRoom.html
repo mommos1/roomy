@@ -12,22 +12,27 @@
         <form method="post" enctype="multipart/form-data" class="accommodation-form">
             <div class="form-group">
                 <label for="name">객실 이름</label>
-                <input type="text" id="name" name="name" th:value="${room.name}" placeholder="객실 이름 입력" required>
+                <input type="text" id="name" th:value="${room.name}" placeholder="객실 이름 입력" required>
             </div>
 
             <div class="form-group">
-                <label for="name">금액</label>
-                <input type="number" id="pricePerNight" name="pricePerNight" th:value="${room.pricePerNight}" placeholder="숙소 금액 입력" required>
+                <label for="numberOfRooms">객실 개수</label>
+                <input type="number" id="numberOfRooms" th:value="${room.numberOfRooms}" placeholder="객실 개수 입력" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pricePerNight">금액</label>
+                <input type="number" id="pricePerNight" th:value="${room.pricePerNight}" placeholder="숙소 금액 입력" required>
             </div>
 
             <div class="form-group">
                 <label for="capacity">인원 수</label>
-                <input type="number" id="capacity" name="capacity" th:value="${room.capacity}" placeholder="예: 3" required>
+                <input type="number" id="capacity" th:value="${room.capacity}" placeholder="예: 3" required>
             </div>
 
             <div class="form-group">
                 <label for="description">설명</label>
-                <input type="text" id="description" name="description" th:value="${room.description}" placeholder="설명 입력" required>
+                <input type="text" id="description" th:value="${room.description}" placeholder="설명 입력" required>
             </div>
 
             <div class="form-actions">
@@ -46,6 +51,7 @@
         function updateRoom() {
             const roomId = [[${roomId}]];
             const name = $('#name').val();
+            const numberOfRooms = $('#numberOfRooms').val();
             const pricePerNight = $('#pricePerNight').val();
             const capacity = $('#capacity').val();
             const description = $('#description').val();
@@ -73,6 +79,7 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     name: name,
+                    numberOfRooms : numberOfRooms,
                     pricePerNight: pricePerNight,
                     capacity: capacity,
                     description: description

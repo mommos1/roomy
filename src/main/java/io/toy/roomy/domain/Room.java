@@ -1,6 +1,6 @@
 package io.toy.roomy.domain;
 
-import io.toy.roomy.dto.request.room.RoomUpdateRequest;
+import io.toy.roomy.dto.request.room.RoomRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Builder
 @Entity
 public class Room {
@@ -26,6 +27,7 @@ public class Room {
     private Long id;
 
     private String name;
+    private int numberOfRooms;
     private int pricePerNight;
     private int capacity;
     private String description;
@@ -37,8 +39,9 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservations = new ArrayList<>();
 
-    public void update(RoomUpdateRequest dto) {
+    public void update(RoomRequest dto) {
         this.name = dto.getName();
+        this.numberOfRooms = dto.getNumberOfRooms();
         this.capacity = dto.getCapacity();
         this.pricePerNight = dto.getPricePerNight();
         this.description = dto.getDescription();

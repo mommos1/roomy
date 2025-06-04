@@ -3,11 +3,11 @@ package io.toy.roomy.service;
 import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.room.RoomRequest;
-import io.toy.roomy.dto.request.room.RoomUpdateRequest;
-import io.toy.roomy.dto.response.room.RoomDetailRecord;
-import io.toy.roomy.dto.response.room.AdminRoomListResponse;
+import io.toy.roomy.dto.response.room.RoomRecord;
+import io.toy.roomy.mapper.RoomMapper;
 import io.toy.roomy.repository.RoomRepository;
 import io.toy.roomy.repository.StayRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +18,12 @@ public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
     private final StayRepository stayRepository;
+    private final RoomMapper roomMapper;
 
-    public RoomServiceImpl(RoomRepository roomRepository, StayRepository stayRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, StayRepository stayRepository, RoomMapper roomMapper) {
         this.roomRepository = roomRepository;
         this.stayRepository = stayRepository;
+        this.roomMapper = roomMapper;
     }
 
     /**
@@ -30,10 +32,9 @@ public class RoomServiceImpl implements RoomService {
      * @return 객실 목록
      */
     @Override
-    public List<AdminRoomListResponse> getRoomList(Long stayId) {
-        return roomRepository.findByStayId(stayId).stream()
-                .map(AdminRoomListResponse::from)
-                .toList();
+    public List<RoomRecord> getRoomList(Long stayId) {
+        List<Room> rooms = roomRepository.findByStayId(stayId);
+        return roomMapper.toRoomResponseList(rooms);
     }
 
     /**
@@ -42,10 +43,12 @@ public class RoomServiceImpl implements RoomService {
      * @return 조회 정보
      */
     @Override
-    public RoomDetailRecord getRoomDetail(Long roomId) {
+    public RoomRecord getRoomDetail(Long roomId) {
         Room room = roomRepository.findById(roomId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 객실이 존재하지 않습니다."));
-        return RoomDetailRecord.from(room);
+                .orElseThrow(() -> new EntityNotFoundException("해당 객실이 존재하지 않습니다."));
+
+        return roomMapper.toRoomResponse(room);
+        //return RoomRecord.from(room);
     }
 
     /**
@@ -56,14 +59,11 @@ public class RoomServiceImpl implements RoomService {
     @Transactional
     @Override
     public Room regRoom(RoomRequest dto) {
-        Stay stay = stayRepository.findById(dto.getStayId()).orElseThrow();
-        Room room = Room.builder()
-                .name(dto.getName())
-                .pricePerNight(dto.getPricePerNight())
-                .capacity(dto.getCapacity())
-                .description(dto.getDescription())
-                .stay(stay)
-                .build();
+        Stay stay = stayRepository.findById(dto.getStayId())
+                .orElseThrow(() -> new EntityNotFoundException("해당 숙소가 존재하지 않습니다."));
+
+        Room room = roomMapper.toEntity(dto);
+        room.setStay(stay);
 
         return roomRepository.save(room);
     }
@@ -87,7 +87,7 @@ public class RoomServiceImpl implements RoomService {
      */
     @Transactional
     @Override
-    public void updateRoom(Long roomId, RoomUpdateRequest dto) {
+    public void updateRoom(Long roomId, RoomRequest dto) {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 객실이 존재하지 않습니다."));
 

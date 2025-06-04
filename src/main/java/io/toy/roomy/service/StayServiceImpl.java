@@ -5,9 +5,10 @@ import io.toy.roomy.domain.Room;
 import io.toy.roomy.domain.Stay;
 import io.toy.roomy.dto.request.stay.StayRequest;
 import io.toy.roomy.dto.request.stay.StayUpdateRequest;
-import io.toy.roomy.dto.response.room.RoomDetailRecord;
+import io.toy.roomy.dto.response.room.RoomRecord;
 import io.toy.roomy.dto.response.stay.StayDetailRecord;
 import io.toy.roomy.dto.response.stay.StayListResponse;
+import io.toy.roomy.mapper.RoomMapper;
 import io.toy.roomy.repository.StayRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -24,9 +25,11 @@ import java.util.List;
 public class StayServiceImpl implements StayService {
 
     private final StayRepository stayRepository;
+    private final RoomMapper roomMapper;
 
-    public StayServiceImpl(StayRepository reserveRepository) {
+    public StayServiceImpl(StayRepository reserveRepository, RoomMapper roomMapper) {
         this.stayRepository = reserveRepository;
+        this.roomMapper = roomMapper;
     }
     
     //숙소 대표이미지 저장 경로
@@ -128,7 +131,7 @@ public class StayServiceImpl implements StayService {
      * @return List<객실 정보>
      */
     @Override
-    public List<RoomDetailRecord> getRoomsByStayID(Long stayId) {
+    public List<RoomRecord> getRoomsByStayID(Long stayId) {
         // StayRepository를 통해 특정 Stay 객체를 조회
         Stay stay = stayRepository.findById(stayId)
                 .orElseThrow(() -> new EntityNotFoundException("ID가" + stayId + "인 숙소를 찾을 수 없습니다."));
@@ -136,8 +139,6 @@ public class StayServiceImpl implements StayService {
         // 이 Stay 객체에 속한 Room 리스트를 가져옵니다.
         List<Room> roomsOfThisStay = stay.getRooms();
 
-        return roomsOfThisStay.stream()
-                .map(RoomDetailRecord::from)
-                .toList();
+        return roomMapper.toRoomResponseList(roomsOfThisStay);
     }
 }

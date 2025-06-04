@@ -12,6 +12,7 @@ import lombok.Getter;
 public class AdminRoomListResponse {
     private Long id;
     private String name;
+    private String numberOfRooms;
     private int pricePerNight;
     private int capacity;
     private String description;
