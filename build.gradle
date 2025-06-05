@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco' // Jacoco 플러그인
 }
 
 group = 'io.toy'
@@ -9,7 +10,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(24)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -45,6 +46,35 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 }
 
+jacoco {
+	toolVersion = '0.8.13'
+}
+
+// Jacoco 리포트 설정
+jacocoTestReport {
+	// 리포트 타입 설정 (기본적으로 XML과 HTML이 권장됨)
+	reports {
+		xml.required = true  // CI/CD 도구(Jenkins, SonarQube 등)와의 연동을 위해 XML 리포트 필수
+		html.required = true // 사람이 읽기 쉬운 HTML 리포트 필수
+		csv.required = false // CSV 리포트는 선택 사항, 필요 없으면 false
+	}
+}
+
+jacocoTestCoverageVerification {
+	// 이 커버리지 기준은 이 글의 맨 아래에서 다시 설명하겠습니다.
+	violationRules {
+		rule {
+			element = 'CLASS'
+
+			limit {
+				counter = 'BRANCH'
+				value = 'COVEREDRATIO'
+				minimum = 0.90
+			}
+		}
+	}
+}
+
 sourceSets {
 	main {
 		java {
@@ -54,11 +84,16 @@ sourceSets {
 }
 
 tasks.named('test') {
+	jvmArgs += "--enable-preview"
+
+	jacoco {
+		destinationFile = file("$buildDir/jacoco/jacoco.exec")
+	}
 	useJUnitPlatform()
-	jvmArgs += ["-XX:+EnableDynamicAgentLoading"]
 }
 
-test {
-	jvmArgs += ["-XX:+EnableDynamicAgentLoading"]
+tasks.withType(JavaCompile) {
+	// 람다식 중 이름없는 변수 허용
+	options.compilerArgs.add('--enable-preview')
 }
 

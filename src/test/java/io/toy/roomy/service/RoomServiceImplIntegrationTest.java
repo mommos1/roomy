@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class RoomServiceImplIntegrationTest {
 
-    @Autowired // 실제 Service 빈을 주입받습니다.
+    @Autowired
     private RoomService roomService;
 
-    @Autowired // 실제 Repository 빈을 주입받아 직접 DB 조작 및 검증 가능
+    @Autowired
     private RoomRepository roomRepository;
 
     @Autowired
