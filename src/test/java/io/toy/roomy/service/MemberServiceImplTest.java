@@ -1,10 +1,8 @@
 package io.toy.roomy.service;
 
 import io.toy.roomy.common.exception.DuplicateMemberException;
-import io.toy.roomy.domain.Member;
 import io.toy.roomy.dto.request.MemberLoginRequest;
 import io.toy.roomy.dto.request.MemberSignupRequest;
-import io.toy.roomy.dto.response.MemberResponse;
 import io.toy.roomy.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

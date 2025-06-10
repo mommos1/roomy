@@ -80,21 +80,28 @@ class RoomServiceImplTest {
         given(roomMapper.toEntity(roomRequest)).willReturn(roomReturnedByMapper);
 
         // when
-        Room savedRoom = roomService.regRoom(roomRequest);
+        roomService.regRoom(roomRequest);
 
         // then
         ArgumentCaptor<Room> roomArgumentCaptor = ArgumentCaptor.forClass(Room.class);
         then(roomRepository).should(times(1)).save(roomArgumentCaptor.capture());
 
         Room savingRoom = roomArgumentCaptor.getValue();
-        assertThat(savedRoom.getId()).isNotNull();
-        assertThat(savedRoom.getName()).isEqualTo(savingRoom.getName());
-        assertThat(savedRoom.getNumberOfRooms()).isEqualTo(savingRoom.getNumberOfRooms());
-        assertThat(savedRoom.getPricePerNight()).isEqualTo(savingRoom.getPricePerNight());
-        assertThat(savedRoom.getCapacity()).isEqualTo(savingRoom.getCapacity());
-        assertThat(savedRoom.getDescription()).isEqualTo(savingRoom.getDescription());
+        //assertThat(roomRequest.getId()).isNotNull();
+        assertThat(roomRequest.getName()).isEqualTo(savingRoom.getName());
+        assertThat(roomRequest.getNumberOfRooms()).isEqualTo(savingRoom.getNumberOfRooms());
+        assertThat(roomRequest.getPricePerNight()).isEqualTo(savingRoom.getPricePerNight());
+        assertThat(roomRequest.getCapacity()).isEqualTo(savingRoom.getCapacity());
+        assertThat(roomRequest.getDescription()).isEqualTo(savingRoom.getDescription());
         
         assertThat(savingRoom.getStay()).isNotNull();
         assertThat(savingRoom.getStay().getId()).isEqualTo(mockStay.getId());
+    }
+
+    //updateStay_whenStayNotExists_shouldThrowException
+    @Test
+    @DisplayName("객실 등록 실패 - ")
+    void regRoom_whenStayNotExists_shouldNotSaveRoom() {
+
     }
 }

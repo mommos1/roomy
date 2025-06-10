@@ -78,11 +78,6 @@ class RoomServiceImplIntegrationTest {
         assertThat(foundRoom.getCapacity()).isEqualTo(roomRequest.getCapacity());
         assertThat(foundRoom.getDescription()).isEqualTo(roomRequest.getDescription());
         assertThat(foundRoom.getStay().getId()).isEqualTo(roomRequest.getStayId()); // Stay 연관 관계도 확인
-
-        // 필요하다면, DB에 저장된 총 Room 개수가 증가했는지도 검증 가능 (하지만 위 검증으로 충분)
-        // long initialCount = roomRepository.count();
-        // ... regRoom 호출 ...
-        // assertThat(roomRepository.count()).isEqualTo(initialCount + 1);
     }
 
 
