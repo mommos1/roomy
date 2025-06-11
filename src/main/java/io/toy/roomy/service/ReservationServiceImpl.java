@@ -43,11 +43,8 @@ public class ReservationServiceImpl implements ReservationService{
         );
 
         //예약된 개수가 최대 객실보다 같거나 넘을 시 예외
-        if (overlappingCount >= 1) {
-            throw new IllegalStateException(
-                    String.format("선택하신 날짜에 해당 객실은 이미 예약 한도(%d개)를 초과했습니다. (현재 겹치는 예약: %d개)",
-                            1, overlappingCount)
-            );
+        if (overlappingCount >= room.getNumberOfRooms()) {
+            throw new IllegalStateException("잔여 객실이 존재하지 않습니다.");
         }
 
         //예약 등록

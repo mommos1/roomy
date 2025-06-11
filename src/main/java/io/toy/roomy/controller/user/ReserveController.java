@@ -19,6 +19,11 @@ public class ReserveController {
         this.reservationService = reservationService;
     }
 
+    /**
+     * 객실 예약 등록
+     * @param dto 객실 정보
+     * @return 처리 결과
+     */
     @PostMapping
     public ResponseEntity<?> regReservation(@RequestBody RoomReserveRequest dto) {
         reservationService.regReservation(dto);
